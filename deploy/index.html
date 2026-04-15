@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sovereign Apps</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    background: #0A0A0A;
+    color: #E8E0D0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .container { max-width: 420px; width: 100%; text-align: center; }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 300;
+    color: #D4AF37; letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+  .sub {
+    font-size: 13px; letter-spacing: 4px; text-transform: uppercase;
+    color: rgba(212,175,55,0.4); margin-bottom: 48px;
+  }
+  a.card {
+    display: block; text-decoration: none;
+    background: rgba(212,175,55,0.04);
+    border: 1px solid rgba(212,175,55,0.12);
+    border-radius: 16px; padding: 28px 24px;
+    margin-bottom: 16px; transition: all 0.3s;
+    text-align: left;
+  }
+  a.card:hover {
+    background: rgba(212,175,55,0.08);
+    border-color: rgba(212,175,55,0.25);
+    transform: translateY(-2px);
+  }
+  .card-icon { font-size: 32px; margin-bottom: 12px; }
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; color: #D4AF37; font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .card-desc { font-size: 15px; color: rgba(232,224,208,0.6); font-weight: 300; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>SOVEREIGN</h1>
+  <div class="sub">Personal Growth Apps</div>
+  
+  <a class="card" href="/abundance/">
+    <div class="card-icon">✦</div>
+    <div class="card-title">Abundance — 21 Days</div>
+    <div class="card-desc">Money & wealth reprogramming based on Rhonda Byrne's countdown teachings. Daily practices, affirmations, visualizations & journaling.</div>
+  </a>
+  
+  <a class="card" href="/bible/">
+    <div class="card-icon">☩</div>
+    <div class="card-title">The Word — 90 Days</div>
+    <div class="card-desc">Read & understand the entire Bible in 3 months. Curated reading plan with context, interpretation guides & study notes.</div>
+  </a>
+</div>
+</body>
+</html>

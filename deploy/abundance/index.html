@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ABUNDANCE — 21 Day Money Reprogramming</title>
+<style>
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; padding: 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.7/babel.min.js"></script>
+<script type="text/babel">
+const { useState, useEffect, useCallback, useRef } = React;
+
+// localStorage wrappers that match window.storage API
+async function localGet(key) {
+  const val = localStorage.getItem(key);
+  if (val === null) throw new Error("not found");
+  return { value: val };
+}
+async function localSet(key, value) {
+  localStorage.setItem(key, value);
+  return { value };
+}
+
+
+const DAYS = [
+  {
+    day: 1,
+    title: "The Frequency of Wealth",
+    focus: "Awareness",
+    morningPractice: "Write down your current dominant money belief. Be brutally honest. Is it 'Money is hard to earn'? 'Rich people are greedy'? 'There's never enough'? Identify THE belief that runs your financial life.",
+    affirmation: "I am shifting my money frequency today. Every thought I think about money is creating my financial future, and I choose abundance now.",
+    exercise: "Count every piece of money you currently have — in your wallet, accounts, coins in drawers. Write the EXACT total. Then say out loud: 'Thank you for this money. More is coming.'",
+    visualization: "Close your eyes for 3 minutes. See your bank account with your ideal balance. Feel the relief, the freedom, the calm. Let that feeling wash through your entire body.",
+    eveningReflection: "What negative money thought came up most today? Write it down, then write its opposite. The opposite is your new truth.",
+    keyTeaching: "Your current financial situation is a printout of your past thoughts about money. Every dollar in your life was attracted by your dominant money frequency. Today we begin changing the signal you're broadcasting."
+  },
+  {
+    day: 2,
+    title: "Gratitude Is The Bridge",
+    focus: "Gratitude",
+    morningPractice: "List 10 things money has already given you — a roof, food, your phone, transport, education. Feel genuine gratitude for each one. Gratitude for what you HAVE is the fastest frequency shift.",
+    affirmation: "I am so grateful for the abundance that already fills my life. Money flows to me because I appreciate every dollar that comes my way.",
+    exercise: "Every time you spend money today — coffee, groceries, petrol — say 'Thank you, money, for allowing me this.' Transform every transaction into a gratitude moment.",
+    visualization: "Imagine opening your mail and seeing a cheque for $10,000. Feel the surprise, the joy, the gratitude. Hold that feeling for 60 seconds.",
+    eveningReflection: "How many times did you catch yourself complaining about money or prices today? Awareness is the first step to change.",
+    keyTeaching: "Rhonda teaches that gratitude is the single most powerful practice for attracting abundance. You cannot feel grateful and feel lack at the same time — they're different frequencies. Gratitude for money magnetises more money to you."
+  },
+  {
+    day: 3,
+    title: "Delete The Debt Story",
+    focus: "Releasing Resistance",
+    morningPractice: "Write 'I release all fear, guilt, and shame about money' three times. Then write every money worry on a separate piece of paper. Read each one, then physically tear it up or burn it.",
+    affirmation: "I release every old story about money that does not serve my abundant future. I am free from financial fear. My past does not determine my wealth.",
+    exercise: "Today, refuse to say ANYTHING negative about money. Not 'I can't afford it' but 'I'm choosing to spend elsewhere right now.' Not 'That's too expensive' but 'That's not my priority today.'",
+    visualization: "Imagine all your debts and financial worries as heavy stones in a backpack. One by one, see yourself removing each stone and dropping it into a river. Feel yourself getting lighter with each release.",
+    eveningReflection: "What old money story from your childhood surfaced today? Whose voice was it — a parent, teacher, society? Thank that voice for trying to protect you, then let it go.",
+    keyTeaching: "You can't attract abundance while vibrating at the frequency of debt-fear. The Law of Attraction responds to your dominant feeling, not your words. If you SAY 'I want money' but FEEL desperate, the Universe matches the desperation, not the desire."
+  },
+  {
+    day: 4,
+    title: "The Secret Cheque",
+    focus: "Receiving",
+    morningPractice: "Write yourself a cheque for the amount of money you want to receive. Date it, sign it 'The Universe'. Put it where you'll see it every day. This is Rhonda's famous Secret Cheque practice.",
+    affirmation: "I am open to receiving unlimited abundance from expected and unexpected sources. Money comes to me easily, frequently, and in increasing amounts.",
+    exercise: "Practice receiving today — if someone offers to pay, buy you coffee, give you something, say YES and THANK YOU. Don't deflect. Don't say 'Oh you didn't have to.' Just receive gracefully.",
+    visualization: "See money flowing toward you from multiple directions — like rivers converging. From your business, from unexpected windfalls, from opportunities you haven't imagined yet. See yourself calmly receiving it all.",
+    eveningReflection: "Did you notice any resistance to receiving today? Where in your body did you feel it? The ability to receive is a muscle most people have let atrophy.",
+    keyTeaching: "Most people are terrible receivers. They deflect compliments, refuse help, and feel guilty about good fortune. But receiving IS giving — when you receive joyfully, you complete the circuit of abundance and allow the giver their joy."
+  },
+  {
+    day: 5,
+    title: "Act As If",
+    focus: "Embodiment",
+    morningPractice: "Today, carry yourself as someone who has complete financial security. How would you walk? How would you speak? What would your energy feel like? Embody THAT version of yourself from the moment you wake up.",
+    affirmation: "I am wealthy. I carry the energy of abundance in everything I do. Financial freedom is not something I'm chasing — it is who I am becoming.",
+    exercise: "Do ONE thing today that your wealthy self would do — it doesn't have to cost money. Maybe it's taking your time instead of rushing, or choosing quality over cheapness in a small decision, or sitting in stillness instead of hustling anxiously.",
+    visualization: "Step into your future self — 12 months from now when money flows abundantly. What does your morning look like? What are you wearing? How do you feel checking your accounts? Live in that scene for 5 minutes.",
+    eveningReflection: "How did it feel to carry wealthy energy today? What shifted? What felt uncomfortable? Discomfort is just your old identity resisting the upgrade.",
+    keyTeaching: "Rhonda's core teaching: you must BE it before you SEE it. The feeling must come first. Most people wait for money to feel abundant — but that's backwards. The feeling of abundance is the cause; money is the effect."
+  },
+  {
+    day: 6,
+    title: "The Magic Money Multiplier",
+    focus: "Giving",
+    morningPractice: "Find a coin or note on the ground today (or place one where someone will find it). The act of 'finding money' trains your brain that money appears for you. Alternatively, give money away — tip generously, donate, buy someone's coffee.",
+    affirmation: "I circulate money with joy and confidence. Every dollar I give returns to me multiplied. I am a channel through which abundance flows to bless others.",
+    exercise: "Give 3 genuine compliments about others' success or possessions today WITHOUT any jealousy. 'Your business is amazing.' 'Your home is beautiful.' 'You deserve every success.' Celebrating others' abundance opens the door to yours.",
+    visualization: "Imagine yourself as a powerful river of wealth. Money flows IN from the mountains (the Universe) and flows OUT to the ocean (others). You are not a dam hoarding water — you are a mighty flowing river. The more that flows through you, the mightier you become.",
+    eveningReflection: "How did giving feel today? Did any scarcity thoughts arise ('I shouldn't spend that' or 'What if I need it')? Notice them without judgement.",
+    keyTeaching: "Giving is proof to your subconscious mind that you believe in abundance. When you give freely, you declare: 'There is more than enough.' Hoarding and clinging say: 'There isn't enough.' The Universe always agrees with your dominant belief."
+  },
+  {
+    day: 7,
+    title: "Weekly Integration",
+    focus: "Reflection & Reset",
+    morningPractice: "Re-read your Day 1 dominant money belief. Has it shifted at all? Write down any new awareness. Then write 3 money wins from this week — no matter how small (found a coin, had a positive money thought, didn't complain about prices).",
+    affirmation: "Every day my relationship with money improves. I am rewiring decades of programming in real time. I am patient with myself and persistent in my practice.",
+    exercise: "Create a 'Money Wins' note on your phone. From today, log EVERY positive money event — a discount, a refund, found money, a new client enquiry, a sale. Watch how your awareness of incoming money shifts your reality.",
+    visualization: "See yourself one week ago vs now. Notice the subtle energetic shift. Your posture is straighter, your thoughts are cleaner, your relationship with money is changing at the subconscious level. Honour that progress.",
+    eveningReflection: "Rate your money energy this week from 1-10. What was your biggest breakthrough? What's still your biggest block? Write both down honestly.",
+    keyTeaching: "Week 1 is about AWARENESS. You can't change what you can't see. Most people sleepwalk through their financial life running unconscious programs from childhood. You've spent 7 days waking up. That alone is transformative."
+  },
+  {
+    day: 8,
+    title: "Rewrite Your Money Story",
+    focus: "New Narrative",
+    morningPractice: "Write your NEW money story in present tense, as if it's already true: 'I am a woman who attracts wealth effortlessly. My business generates consistent, growing revenue. Money loves me and I love money.' Make it at least a full paragraph.",
+    affirmation: "My new money story is writing itself through me right now. I am the author of my financial destiny and I choose a story of abundance, ease, and overflow.",
+    exercise: "Read your new money story aloud 3 times today — morning, midday, and evening. Each time, FEEL it more deeply. Let your nervous system absorb the new narrative.",
+    visualization: "Imagine your new money story as a movie. You are both the director and the star. See the scenes playing out — your business thriving, deposits landing in your account, making decisions from abundance rather than fear. Watch the whole movie.",
+    eveningReflection: "Which part of your new money story felt most real? Which part felt most like a stretch? The stretch points are exactly where your biggest growth is waiting.",
+    keyTeaching: "Neuroscience confirms what Rhonda teaches: your brain cannot distinguish between a vividly imagined experience and a real one. When you repeatedly tell and FEEL your new money story, you literally rewire neural pathways. You're not pretending — you're pre-paving."
+  },
+  {
+    day: 9,
+    title: "The Abundance Countdown",
+    focus: "Rhonda's Countdown Method",
+    morningPractice: "This is Rhonda's powerful countdown technique: Count backwards from 30 to 1, and with EACH number, name something you're grateful money has provided. Don't repeat. 30 unique things. This floods your system with abundance frequency.",
+    affirmation: "My life is overflowing with evidence of abundance. When I look for wealth, I find it everywhere. The Universe is constantly proving its generosity to me.",
+    exercise: "Carry a $50 or $100 note in your wallet today. Don't spend it. Every time you see it, think 'I could buy...' and mentally spend it on 10 different things. Rhonda's technique: the FEELING of having money to spend is what attracts more.",
+    visualization: "Imagine 30 golden coins floating in front of you. Each one represents something money has given you. Touch each coin and feel gratitude as it glows brighter. By the end, you're surrounded by golden light.",
+    eveningReflection: "Was it easy or hard to find 30 things? If hard, that reveals how much your scarcity lens has been filtering out the abundance that already exists in your life.",
+    keyTeaching: "The countdown method works because counting backwards requires focus — your mind can't wander to worry while counting down AND generating gratitude simultaneously. It's a neurological hack that forces presence and positivity."
+  },
+  {
+    day: 10,
+    title: "Money Loves Speed",
+    focus: "Action & Alignment",
+    morningPractice: "Write down 5 money-making actions you've been procrastinating on. Circle the ONE that scares you most. That's your task today. Inspired action + abundant mindset = accelerated results.",
+    affirmation: "I take inspired, aligned action toward wealth every single day. The Universe rewards my boldness with opportunities, connections, and income beyond my expectations.",
+    exercise: "Do the scary money action you circled. Send that pitch. List that product. Follow up with that lead. Raise your price. Whatever it is — do it TODAY. Mindset without action is just daydreaming.",
+    visualization: "See yourself completing the scary action and it going BRILLIANTLY. The response is better than expected. The outcome exceeds your hopes. Feel the rush of 'I can't believe I almost didn't do this.'",
+    eveningReflection: "Did you do it? If yes — how do you feel? If no — what stopped you? Be honest. The resistance IS the work.",
+    keyTeaching: "Rhonda never teaches passive manifestation. The Universe can't deliver a pizza if you don't open the front door. Attraction + Action = Abundance. Your job is to match your energy AND your effort to the life you want."
+  },
+  {
+    day: 11,
+    title: "Clear The Envy Channel",
+    focus: "Celebrating Others' Wealth",
+    morningPractice: "Think of 3 people who have the financial success you want. Instead of envy, send them genuine gratitude: 'Thank you for showing me what's possible. Your wealth is proof that mine is available too.'",
+    affirmation: "Other people's success is evidence of MY potential. There is no limit to abundance. Someone else's wealth does not diminish mine — it expands what I believe is possible.",
+    exercise: "Follow 3 wealthy/successful people on social media whose content makes you feel INSPIRED rather than envious. Curate your feed to match your desired frequency.",
+    visualization: "See yourself sitting at a table with wealthy, generous people. They're welcoming you warmly, sharing strategies, celebrating your wins. You belong in this room. This is your peer group now.",
+    eveningReflection: "Notice any envy or judgement toward wealthy people today. Where does that come from? Envy is just desire wearing a mask of resentment. Underneath it is 'I want that too' — and that wanting is VALID.",
+    keyTeaching: "Envy is the most destructive frequency for wealth attraction. When you resent someone's money, you're telling the Universe 'money is bad' — so the Universe keeps it away from you. Bless what you want to attract."
+  },
+  {
+    day: 12,
+    title: "The Magnetic Mind",
+    focus: "Thought Discipline",
+    morningPractice: "Set a timer that goes off every hour today. Each time it rings, check: 'What was I just thinking about money?' Log it. You'll be stunned at how much unconscious scarcity thinking still runs in the background.",
+    affirmation: "My mind is a powerful magnet for wealth. I choose my money thoughts deliberately. Every thought is a seed and I only plant abundance.",
+    exercise: "Every time you catch a scarcity thought today, physically snap your fingers and replace it with an abundance thought. Snap = pattern interrupt. New thought = new neural pathway.",
+    visualization: "See your mind as a radio. You've been tuned to 'Scarcity FM' your whole life. Now slowly turn the dial to 'Abundance FM.' The static clears. The signal gets stronger. You hear wealth, opportunity, and possibility clearly.",
+    eveningReflection: "How many scarcity thoughts did you catch today? Celebrate every single one — each catch is your awareness muscle getting stronger. You can't change unconscious thoughts; you can only change the ones you're now conscious of.",
+    keyTeaching: "Rhonda teaches that you have roughly 60,000 thoughts a day, and most are repeats from yesterday. Your financial life is the sum of your repeated money thoughts. Change the dominant thought, change the dominant result."
+  },
+  {
+    day: 13,
+    title: "Quantum Leap Belief",
+    focus: "Expanding Capacity",
+    morningPractice: "Write down your current monthly income goal. Now multiply it by 10. Sit with that number. Notice your body's reaction — tightness? Disbelief? Excitement? Your body reveals your true abundance thermostat.",
+    affirmation: "I expand my capacity for wealth every day. There is no ceiling on what I can earn, receive, and create. I give myself full permission to be extraordinarily wealthy.",
+    exercise: "Research someone in your industry who earns 10x what you currently earn. Study what they do differently. The gap between you and them is not talent — it's belief and strategy.",
+    visualization: "See your income growing like a graph going up — not gradually but in quantum leaps. See the line jump. See months where income doubles, then doubles again. Feel the normalcy of earning abundantly.",
+    eveningReflection: "What's the maximum amount of money you truly believe you can earn in the next 12 months? Write it down. Now ask: who set that limit? Was it you or someone else's voice?",
+    keyTeaching: "Your abundance thermostat was set in childhood and rarely gets updated. Just as a house thermostat kicks in to maintain temperature, your subconscious works to keep you at your 'set point.' These 21 days are resetting your thermostat to a higher setting."
+  },
+  {
+    day: 14,
+    title: "Halfway Integration",
+    focus: "Deep Reset",
+    morningPractice: "You're halfway. Write a letter to money — yes, literally address it as 'Dear Money.' Apologise for resenting it, fearing it, or pushing it away. Tell it you're ready for a new relationship. Commit to treating it with respect and gratitude.",
+    affirmation: "I am halfway through a profound transformation. My relationship with money has already shifted at a cellular level. I honour my progress and trust the process completely.",
+    exercise: "Review your 'Money Wins' log from Day 7. Add everything from this week. Notice: are the wins getting bigger or more frequent? Your reticular activating system is now scanning for abundance instead of lack.",
+    visualization: "See yourself standing at a doorway. Behind you is your old money story — scarcity, struggle, fear. Ahead of you is your new reality — abundance, ease, flow. Step through the doorway. Feel it close behind you. There's no going back.",
+    eveningReflection: "What's the single biggest shift in your money mindset over these 14 days? Write it down. This is evidence that change is happening. Your external results will follow your internal shift.",
+    keyTeaching: "Most people quit programs at the halfway point because the external results haven't caught up with the internal work. But manifestation works like planting seeds — the most important growth happens underground before anything breaks the surface. KEEP GOING."
+  },
+  {
+    day: 15,
+    title: "Wealthy Woman Identity",
+    focus: "Identity Shift",
+    morningPractice: "Define your Wealthy Woman identity in detail. How does she think? What does she believe about money? How does she make decisions? How does she carry herself? Write her full profile — because she is who you're becoming.",
+    affirmation: "I am stepping into my wealthy identity with confidence and grace. This is not a future version of me — she exists NOW, and I am her.",
+    exercise: "Make one decision today as your Wealthy Woman self. It could be how you respond to a business enquiry, how you price something, or how you spend your time. Let HER decide, not your old self.",
+    visualization: "See your Wealthy Woman self standing in front of you. She smiles knowingly. She reaches out and merges with you — her confidence, her ease, her certainty about money flows into every cell of your body. You are one.",
+    eveningReflection: "How did it feel making a decision as your wealthy self? What would have been different if your old self had decided? The gap between those two answers is your growth edge.",
+    keyTeaching: "Identity is the deepest level of change. You don't GET wealth and then become a wealthy person — you become a wealthy person and then wealth follows. Beliefs change behaviour; identity changes everything."
+  },
+  {
+    day: 16,
+    title: "Abundance In Your Body",
+    focus: "Somatic Rewiring",
+    morningPractice: "Place your hand on your heart and breathe deeply 10 times. With each exhale, release physical tension you hold around money — tight shoulders, clenched jaw, knotted stomach. Scarcity lives in the body, not just the mind.",
+    affirmation: "My body is relaxed and open to receiving abundance. I release all physical tension associated with financial stress. Wealth flows through a relaxed, trusting body.",
+    exercise: "Do a body scan 3 times today specifically noticing where you hold money stress. Shoulders? Chest? Gut? Each time, breathe into that area and consciously soften it. Say 'I release this tension. I am safe and supported.'",
+    visualization: "Imagine warm golden light entering through the top of your head and slowly flowing down through your entire body — melting every knot of financial fear, dissolving every tight spot of money worry. By the time it reaches your toes, you're completely relaxed and open.",
+    eveningReflection: "Where does your body hold money stress? How long has it been carrying that? Thank your body for trying to protect you, then remind it: 'We're safe now. Abundance is our new normal.'",
+    keyTeaching: "Trauma and limiting beliefs are stored somatically. Your nervous system may be in fight-or-flight around money without you knowing. Calming the body's money response allows your subconscious to accept new abundance programming."
+  },
+  {
+    day: 17,
+    title: "The 10x Vision Board",
+    focus: "Visual Anchoring",
+    morningPractice: "Spend 20 minutes creating a mental or physical vision board of your 10x financial life. Home, travel, business success, freedom, generosity. Make it VIVID. Details matter — your subconscious responds to specifics.",
+    affirmation: "My abundant future is already real in the quantum field. I see it clearly, I feel it deeply, and I watch it materialise with calm certainty every single day.",
+    exercise: "Screenshot or save 5 images that represent your wealthy life — the home, the travel, the business dashboard showing revenue. Set one as your phone wallpaper. Let your subconscious marinate in the image all day.",
+    visualization: "Walk through your dream home. Touch the surfaces. Open the fridge — it's full. Look out the window — the view is stunning. Check your phone — your business dashboard shows another record month. This is Tuesday. This is just a normal day in your abundant life.",
+    eveningReflection: "Which image from today's vision board made you feel the most emotion? That's your most powerful anchor. Return to it whenever you need a frequency boost.",
+    keyTeaching: "The subconscious mind thinks in pictures, not words. That's why vision boards work — they bypass the logical mind's objections and speak directly to the part of your brain that creates reality. The more vivid the image, the more powerful the programming."
+  },
+  {
+    day: 18,
+    title: "Forgive & Release",
+    focus: "Deep Forgiveness",
+    morningPractice: "Write down the name of everyone who ever made you feel 'not enough' financially — parents who said 'we can't afford it,' partners who controlled money, employers who underpaid you. Then write next to each name: 'I forgive you and I release this block.'",
+    affirmation: "I forgive everyone who contributed to my old money story. They did their best with what they knew. I release all resentment and reclaim my financial power NOW.",
+    exercise: "If possible, have a conversation (real or imagined) with the person who most impacted your money beliefs. Thank them for the lesson. Declare that their chapter in your money story is OVER.",
+    visualization: "See each person who shaped your money story standing in front of you. Cut the energetic cord between you and each one. Watch the cord dissolve into golden light. As each cord is cut, feel yourself become lighter and more free.",
+    eveningReflection: "Who was hardest to forgive? That person holds the key to your biggest breakthrough. Forgiveness isn't about them — it's about freeing YOUR energy for wealth creation.",
+    keyTeaching: "Unforgiveness is an energetic anchor. It literally weighs down your vibration and keeps you connected to old pain. Rhonda teaches that you cannot attract your future while you're energetically chained to your past. Forgiveness is the bolt-cutter."
+  },
+  {
+    day: 19,
+    title: "Overflow Consciousness",
+    focus: "Beyond Enough",
+    morningPractice: "Shift from 'enough' thinking to 'overflow' thinking. Write 10 ways you would use overflow money — beyond your needs. Charity, family, experiences, legacy. When you have PURPOSE for wealth beyond yourself, the Universe responds powerfully.",
+    affirmation: "I don't just attract enough — I attract overflow. Abundance pours into my life so I can give generously, live fully, and create a legacy that blesses generations.",
+    exercise: "Choose a cause or person you will financially support when your overflow arrives. Research it. Get specific. Write down exactly what you'll give and to whom. Make it real in your mind.",
+    visualization: "See yourself writing large cheques to causes you love. See the impact — families helped, communities transformed, futures changed because of YOUR overflow. Feel the profound purpose and joy of being a channel for abundance.",
+    eveningReflection: "How did it feel to plan your overflow giving? Notice: did it feel exciting or 'too far away'? If the latter, you've just found your next belief to upgrade.",
+    keyTeaching: "The Universe is more generous with people who have generous intentions. When your 'WHY' for wealth extends beyond personal comfort to genuine service, you align with the fundamental law of abundance: give and it shall be given unto you."
+  },
+  {
+    day: 20,
+    title: "The Point of No Return",
+    focus: "Permanent Shift",
+    morningPractice: "Declare out loud, with conviction: 'I will NEVER go back to scarcity thinking. The old version of me who feared money is gone. I am permanently, irreversibly committed to abundance.' Write this declaration and sign it.",
+    affirmation: "My transformation is complete at the deepest level. Abundance is no longer something I practice — it is who I AM. There is no going back because there is nothing to go back to.",
+    exercise: "Identify your Top 3 money triggers — the situations that most often pull you back into scarcity mode. Write a specific abundance response for each one. When the trigger hits, you'll have your new response ready.",
+    visualization: "See your old scarcity self walking away from you, getting smaller and smaller until she disappears completely. Wave goodbye with love. Then turn around and see your abundant future stretching endlessly before you — golden, infinite, and yours.",
+    eveningReflection: "Read your new money story from Day 8. Does it need updating? Is your vision BIGGER now than it was 12 days ago? If yes, your thermostat has shifted. Update the story to match your expanded belief.",
+    keyTeaching: "Day 20 is the neurological tipping point. Research shows 21 days creates a habit, but Day 20 is when the new neural pathways are strong enough to become your DEFAULT rather than your practice. You're almost there."
+  },
+  {
+    day: 21,
+    title: "The New You Is Here",
+    focus: "Integration & Celebration",
+    morningPractice: "Read your Day 1 money belief, then read your Day 8 money story, then read your Day 20 declaration. See the arc of transformation. Write a final money manifesto — your unshakeable financial truth going forward.",
+    affirmation: "I have rewired my mind for wealth. I am a magnet for money, opportunities, and abundance in all forms. This is not the end of my transformation — it is the beginning of my abundant life.",
+    exercise: "Celebrate. Buy yourself something — even small — that represents your new money identity. Not from scarcity, but from abundance. Let it be an anchor item that reminds you who you've become.",
+    visualization: "See the next 12 months unfolding with your new abundance programming running. See Sovereign Publishing thriving. See sales notifications coming in. See your bank balance growing steadily. See yourself calm, confident, and free. Feel the deep knowing: this is happening.",
+    eveningReflection: "What is the single biggest transformation from these 21 days? Write it on a card and put it where you'll see it every morning. This is your anchor truth.",
+    keyTeaching: "You've done in 21 days what most people never do in a lifetime — you've consciously reprogrammed your money mindset. But remember: the reprogramming is only as permanent as your daily practice. Keep the gratitude, keep the visualization, keep the abundant identity. This isn't a programme you completed — it's a life you've begun."
+  }
+];
+
+// ── Styles ──
+const fonts = `
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600;700&display=swap');
+`;
+
+const App = () => {
+  const [currentDay, setCurrentDay] = useState(1);
+  const [view, setView] = useState("home"); // home, day, journal, progress
+  const [completedDays, setCompletedDays] = useState({});
+  const [journalEntries, setJournalEntries] = useState({});
+  const [journalText, setJournalText] = useState("");
+  const [expandedSection, setExpandedSection] = useState(null);
+  const [loaded, setLoaded] = useState(false);
+  const [fadeIn, setFadeIn] = useState(false);
+
+  // Load from storage
+  useEffect(() => {
+    (async () => {
+      try {
+        const r1 = await localGet("abundance-completed");
+        if (r1) setCompletedDays(JSON.parse(r1.value));
+      } catch {}
+      try {
+        const r2 = await localGet("abundance-journal");
+        if (r2) setJournalEntries(JSON.parse(r2.value));
+      } catch {}
+      try {
+        const r3 = await localGet("abundance-currentday");
+        if (r3) setCurrentDay(parseInt(r3.value));
+      } catch {}
+      setLoaded(true);
+      setTimeout(() => setFadeIn(true), 50);
+    })();
+  }, []);
+
+  const saveCompleted = async (data) => {
+    setCompletedDays(data);
+    try { await localSet("abundance-completed", JSON.stringify(data)); } catch {}
+  };
+
+  const saveJournal = async (data) => {
+    setJournalEntries(data);
+    try { await localSet("abundance-journal", JSON.stringify(data)); } catch {}
+  };
+
+  const saveCurrentDay = async (d) => {
+    setCurrentDay(d);
+    try { await localSet("abundance-currentday", String(d)); } catch {}
+  };
+
+  const toggleComplete = (day) => {
+    const next = { ...completedDays, [day]: !completedDays[day] };
+    saveCompleted(next);
+  };
+
+  const completedCount = Object.values(completedDays).filter(Boolean).length;
+  const progressPct = Math.round((completedCount / 21) * 100);
+
+  const dayData = DAYS.find(d => d.day === currentDay);
+
+  const sections = dayData ? [
+    { key: "morning", icon: "☀️", label: "Morning Practice", content: dayData.morningPractice },
+    { key: "affirmation", icon: "✨", label: "Affirmation", content: dayData.affirmation },
+    { key: "exercise", icon: "⚡", label: "Daily Exercise", content: dayData.exercise },
+    { key: "visualization", icon: "🔮", label: "Visualization", content: dayData.visualization },
+    { key: "teaching", icon: "📖", label: "Key Teaching", content: dayData.keyTeaching },
+    { key: "reflection", icon: "🌙", label: "Evening Reflection", content: dayData.eveningReflection },
+  ] : [];
+
+  const getWeek = (day) => Math.ceil(day / 7);
+  const focusColors = {
+    "Awareness": "#D4AF37", "Gratitude": "#E8B960", "Releasing Resistance": "#C9A84C",
+    "Receiving": "#F0D080", "Embodiment": "#B8942E", "Giving": "#DFC56A",
+    "Reflection & Reset": "#A68A2E", "New Narrative": "#D4AF37", "Rhonda's Countdown Method": "#E8B960",
+    "Action & Alignment": "#C9A84C", "Celebrating Others' Wealth": "#F0D080",
+    "Thought Discipline": "#B8942E", "Expanding Capacity": "#DFC56A", "Deep Reset": "#A68A2E",
+    "Identity Shift": "#D4AF37", "Somatic Rewiring": "#E8B960", "Visual Anchoring": "#C9A84C",
+    "Deep Forgiveness": "#F0D080", "Beyond Enough": "#B8942E", "Permanent Shift": "#DFC56A",
+    "Integration & Celebration": "#D4AF37"
+  };
+
+  if (!loaded) return null;
+
+  return (
+    <>
+      <style>{fonts}{`
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .ab-root {
+          font-family: 'Outfit', sans-serif;
+          min-height: 100vh;
+          background: #0A0A0A;
+          color: #E8E0D0;
+          overflow-x: hidden;
+          opacity: ${fadeIn ? 1 : 0};
+          transition: opacity 0.8s ease;
+        }
+        .ab-root::before {
+          content: '';
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: radial-gradient(ellipse at 20% 0%, rgba(212,175,55,0.06) 0%, transparent 60%),
+                      radial-gradient(ellipse at 80% 100%, rgba(212,175,55,0.04) 0%, transparent 60%);
+          pointer-events: none;
+          z-index: 0;
+        }
+        .ab-content { position: relative; z-index: 1; max-width: 480px; margin: 0 auto; padding: 20px 16px 100px; }
+        .ab-nav {
+          position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+          background: rgba(10,10,10,0.95); backdrop-filter: blur(20px);
+          border-top: 1px solid rgba(212,175,55,0.15);
+          display: flex; justify-content: space-around; padding: 12px 0 20px;
+        }
+        .ab-nav-btn {
+          background: none; border: none; color: #666; font-size: 13px; 
+          font-family: 'Outfit'; display: flex; flex-direction: column; 
+          align-items: center; gap: 4px; cursor: pointer; transition: color 0.3s;
+          padding: 4px 12px;
+        }
+        .ab-nav-btn.active { color: #D4AF37; }
+        .ab-nav-icon { font-size: 24px; }
+        .ab-header {
+          text-align: center; padding: 24px 0 32px;
+        }
+        .ab-logo {
+          font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300;
+          color: #D4AF37; letter-spacing: 3px; margin-bottom: 4px;
+        }
+        .ab-subtitle {
+          font-size: 13px; letter-spacing: 4px; text-transform: uppercase;
+          color: rgba(212,175,55,0.5); font-weight: 300;
+        }
+        .ab-progress-ring {
+          width: 180px; height: 180px; margin: 24px auto;
+          position: relative; display: flex; align-items: center; justify-content: center;
+        }
+        .ab-progress-ring svg { position: absolute; transform: rotate(-90deg); }
+        .ab-progress-center {
+          text-align: center;
+        }
+        .ab-progress-pct { font-family: 'Cormorant Garamond'; font-size: 52px; color: #D4AF37; font-weight: 300; line-height: 1; }
+        .ab-progress-label { font-size: 14px; color: #666; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+        .ab-week-label {
+          font-family: 'Cormorant Garamond'; font-size: 20px; color: rgba(212,175,55,0.6);
+          letter-spacing: 2px; margin: 28px 0 12px; font-weight: 300;
+        }
+        .ab-day-card {
+          background: rgba(212,175,55,0.04); border: 1px solid rgba(212,175,55,0.1);
+          border-radius: 12px; padding: 16px; margin-bottom: 8px; cursor: pointer;
+          transition: all 0.3s ease; display: flex; align-items: center; gap: 14px;
+        }
+        .ab-day-card:hover { background: rgba(212,175,55,0.08); border-color: rgba(212,175,55,0.2); }
+        .ab-day-card.completed { border-color: rgba(212,175,55,0.3); }
+        .ab-day-num {
+          width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+          font-family: 'Cormorant Garamond'; font-size: 20px; font-weight: 600; flex-shrink: 0;
+          background: rgba(212,175,55,0.1); color: #D4AF37; border: 1px solid rgba(212,175,55,0.2);
+          transition: all 0.3s;
+        }
+        .ab-day-card.completed .ab-day-num { background: #D4AF37; color: #0A0A0A; }
+        .ab-day-info { flex: 1; min-width: 0; }
+        .ab-day-title { font-size: 18px; font-weight: 500; color: #E8E0D0; margin-bottom: 2px; }
+        .ab-day-focus { font-size: 15px; color: rgba(212,175,55,0.6); font-weight: 300; }
+        .ab-day-arrow { color: rgba(212,175,55,0.3); font-size: 22px; }
+
+        /* Day View */
+        .ab-day-header { text-align: center; padding: 20px 0 24px; }
+        .ab-day-badge {
+          display: inline-block; padding: 4px 16px; border-radius: 20px;
+          font-size: 14px; letter-spacing: 2px; text-transform: uppercase;
+          background: rgba(212,175,55,0.12); color: #D4AF37; margin-bottom: 12px;
+        }
+        .ab-day-view-title {
+          font-family: 'Cormorant Garamond'; font-size: 38px; font-weight: 300;
+          color: #D4AF37; line-height: 1.2; margin-bottom: 6px;
+        }
+        .ab-day-view-focus { font-size: 16px; color: rgba(212,175,55,0.5); letter-spacing: 2px; }
+        .ab-section {
+          background: rgba(212,175,55,0.03); border: 1px solid rgba(212,175,55,0.08);
+          border-radius: 12px; margin-bottom: 8px; overflow: hidden; transition: all 0.3s;
+        }
+        .ab-section.expanded { background: rgba(212,175,55,0.06); border-color: rgba(212,175,55,0.15); }
+        .ab-section-header {
+          display: flex; align-items: center; gap: 12px; padding: 16px;
+          cursor: pointer; transition: background 0.3s;
+        }
+        .ab-section-header:hover { background: rgba(212,175,55,0.05); }
+        .ab-section-icon { font-size: 24px; }
+        .ab-section-label { flex: 1; font-size: 18px; font-weight: 500; }
+        .ab-section-toggle { color: rgba(212,175,55,0.4); font-size: 18px; transition: transform 0.3s; }
+        .ab-section-toggle.open { transform: rotate(180deg); }
+        .ab-section-content {
+          padding: 0 16px 16px; font-size: 18px; line-height: 1.7; color: rgba(232,224,208,0.8); font-weight: 300;
+        }
+        .ab-section.affirmation-section .ab-section-content {
+          font-family: 'Cormorant Garamond'; font-size: 22px; font-style: italic;
+          color: #D4AF37; line-height: 1.6; text-align: center; padding: 8px 20px 20px;
+        }
+        .ab-complete-btn {
+          display: flex; align-items: center; justify-content: center; gap: 10px;
+          width: 100%; padding: 16px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.3);
+          background: rgba(212,175,55,0.08); color: #D4AF37; font-family: 'Outfit';
+          font-size: 18px; font-weight: 500; cursor: pointer; margin-top: 20px; transition: all 0.3s;
+          letter-spacing: 1px;
+        }
+        .ab-complete-btn:hover { background: rgba(212,175,55,0.15); }
+        .ab-complete-btn.done { background: #D4AF37; color: #0A0A0A; border-color: #D4AF37; }
+        .ab-day-nav {
+          display: flex; justify-content: space-between; margin-top: 16px; gap: 8px;
+        }
+        .ab-day-nav-btn {
+          flex: 1; padding: 12px; border-radius: 10px; border: 1px solid rgba(212,175,55,0.15);
+          background: rgba(212,175,55,0.04); color: rgba(212,175,55,0.6);
+          font-family: 'Outfit'; font-size: 16px; cursor: pointer; text-align: center;
+          transition: all 0.3s;
+        }
+        .ab-day-nav-btn:hover { background: rgba(212,175,55,0.1); color: #D4AF37; }
+        .ab-back-btn {
+          background: none; border: none; color: rgba(212,175,55,0.5); font-family: 'Outfit';
+          font-size: 17px; cursor: pointer; padding: 8px 0; display: flex; align-items: center; gap: 6px;
+          transition: color 0.3s;
+        }
+        .ab-back-btn:hover { color: #D4AF37; }
+
+        /* Journal */
+        .ab-journal-area {
+          width: 100%; min-height: 120px; background: rgba(212,175,55,0.04);
+          border: 1px solid rgba(212,175,55,0.12); border-radius: 12px; padding: 14px;
+          color: #E8E0D0; font-family: 'Outfit'; font-size: 18px; resize: vertical;
+          outline: none; transition: border-color 0.3s; line-height: 1.6;
+        }
+        .ab-journal-area:focus { border-color: rgba(212,175,55,0.4); }
+        .ab-journal-area::placeholder { color: rgba(212,175,55,0.25); }
+        .ab-journal-save {
+          padding: 12px 24px; border-radius: 10px; background: rgba(212,175,55,0.12);
+          border: 1px solid rgba(212,175,55,0.25); color: #D4AF37; font-family: 'Outfit';
+          font-size: 17px; cursor: pointer; margin-top: 10px; transition: all 0.3s;
+        }
+        .ab-journal-save:hover { background: rgba(212,175,55,0.2); }
+        .ab-journal-entry {
+          background: rgba(212,175,55,0.04); border: 1px solid rgba(212,175,55,0.08);
+          border-radius: 10px; padding: 14px; margin-bottom: 8px;
+        }
+        .ab-journal-entry-day { font-size: 15px; color: #D4AF37; letter-spacing: 1px; margin-bottom: 6px; font-weight: 500; }
+        .ab-journal-entry-text { font-size: 17px; line-height: 1.6; color: rgba(232,224,208,0.7); font-weight: 300; }
+
+        /* Progress */
+        .ab-streak { text-align: center; padding: 20px 0; }
+        .ab-streak-num { font-family: 'Cormorant Garamond'; font-size: 72px; color: #D4AF37; font-weight: 300; line-height: 1; }
+        .ab-streak-label { font-size: 15px; color: #666; letter-spacing: 3px; text-transform: uppercase; margin-top: 8px; }
+        .ab-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 20px; }
+        .ab-cal-day {
+          aspect-ratio: 1; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+          font-size: 17px; font-weight: 500; border: 1px solid rgba(212,175,55,0.08);
+          background: rgba(212,175,55,0.03); color: #666; transition: all 0.3s;
+        }
+        .ab-cal-day.done { background: rgba(212,175,55,0.2); color: #D4AF37; border-color: rgba(212,175,55,0.3); }
+        .ab-cal-day.today { border-color: #D4AF37; color: #D4AF37; }
+
+        .ab-divider {
+          height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.15), transparent);
+          margin: 24px 0;
+        }
+        .ab-section-title {
+          font-family: 'Cormorant Garamond'; font-size: 22px; color: rgba(212,175,55,0.7);
+          font-weight: 300; margin-bottom: 16px; letter-spacing: 1px;
+        }
+        .ab-reset-btn {
+          background: none; border: 1px solid rgba(255,80,80,0.2); color: rgba(255,80,80,0.5);
+          font-family: 'Outfit'; font-size: 15px; padding: 8px 16px; border-radius: 8px;
+          cursor: pointer; margin-top: 24px; transition: all 0.3s;
+        }
+        .ab-reset-btn:hover { border-color: rgba(255,80,80,0.5); color: rgba(255,80,80,0.8); }
+
+        @keyframes shimmer {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+        .ab-shimmer {
+          background: linear-gradient(90deg, #D4AF37 0%, #F0D080 25%, #D4AF37 50%, #F0D080 75%, #D4AF37 100%);
+          background-size: 200% auto;
+          -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation: shimmer 4s linear infinite;
+        }
+      `}</style>
+
+      <div className="ab-root">
+        <div className="ab-content">
+          {/* ── HOME VIEW ── */}
+          {view === "home" && (
+            <>
+              <div className="ab-header">
+                <div className="ab-logo">ABUNDANCE</div>
+                <div className="ab-subtitle">21 Days to Rewire Your Wealth Mind</div>
+              </div>
+
+              <div className="ab-progress-ring">
+                <svg width="180" height="180" viewBox="0 0 180 180">
+                  <circle cx="90" cy="90" r="78" fill="none" stroke="rgba(212,175,55,0.1)" strokeWidth="2" />
+                  <circle cx="90" cy="90" r="78" fill="none" stroke="#D4AF37" strokeWidth="2"
+                    strokeDasharray={`${2 * Math.PI * 78}`}
+                    strokeDashoffset={`${2 * Math.PI * 78 * (1 - progressPct / 100)}`}
+                    strokeLinecap="round"
+                    style={{ transition: "stroke-dashoffset 1s ease" }}
+                  />
+                </svg>
+                <div className="ab-progress-center">
+                  <div className="ab-progress-pct">{progressPct}%</div>
+                  <div className="ab-progress-label">{completedCount} of 21 days</div>
+                </div>
+              </div>
+
+              {[1, 2, 3].map(week => (
+                <div key={week}>
+                  <div className="ab-week-label">
+                    Week {week} {week === 1 ? "— Awakening" : week === 2 ? "— Deepening" : "— Embodying"}
+                  </div>
+                  {DAYS.filter(d => getWeek(d.day) === week).map(d => (
+                    <div key={d.day} className={`ab-day-card ${completedDays[d.day] ? "completed" : ""}`}
+                      onClick={() => { saveCurrentDay(d.day); setView("day"); setExpandedSection(null); }}>
+                      <div className="ab-day-num">{completedDays[d.day] ? "✓" : d.day}</div>
+                      <div className="ab-day-info">
+                        <div className="ab-day-title">{d.title}</div>
+                        <div className="ab-day-focus">{d.focus}</div>
+                      </div>
+                      <div className="ab-day-arrow">›</div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </>
+          )}
+
+          {/* ── DAY VIEW ── */}
+          {view === "day" && dayData && (
+            <>
+              <button className="ab-back-btn" onClick={() => setView("home")}>← All Days</button>
+
+              <div className="ab-day-header">
+                <div className="ab-day-badge">Day {dayData.day} of 21</div>
+                <div className="ab-day-view-title">{dayData.title}</div>
+                <div className="ab-day-view-focus">Focus: {dayData.focus}</div>
+              </div>
+
+              {sections.map(s => (
+                <div key={s.key} className={`ab-section ${expandedSection === s.key ? "expanded" : ""} ${s.key === "affirmation" ? "affirmation-section" : ""}`}>
+                  <div className="ab-section-header" onClick={() => setExpandedSection(expandedSection === s.key ? null : s.key)}>
+                    <span className="ab-section-icon">{s.icon}</span>
+                    <span className="ab-section-label">{s.label}</span>
+                    <span className={`ab-section-toggle ${expandedSection === s.key ? "open" : ""}`}>▼</span>
+                  </div>
+                  {expandedSection === s.key && (
+                    <div className="ab-section-content">{s.content}</div>
+                  )}
+                </div>
+              ))}
+
+              <button
+                className={`ab-complete-btn ${completedDays[dayData.day] ? "done" : ""}`}
+                onClick={() => toggleComplete(dayData.day)}
+              >
+                {completedDays[dayData.day] ? "✓ Day Complete" : "Mark Day Complete"}
+              </button>
+
+              <div className="ab-divider" />
+              <div className="ab-section-title">Journal Entry</div>
+              <textarea
+                className="ab-journal-area"
+                placeholder="Write your reflections, breakthroughs, and insights for today..."
+                value={journalText || journalEntries[dayData.day] || ""}
+                onChange={e => setJournalText(e.target.value)}
+              />
+              <button className="ab-journal-save" onClick={() => {
+                const next = { ...journalEntries, [dayData.day]: journalText };
+                saveJournal(next);
+                setJournalText("");
+              }}>Save Entry</button>
+
+              <div className="ab-day-nav">
+                {dayData.day > 1 && (
+                  <button className="ab-day-nav-btn" onClick={() => { saveCurrentDay(dayData.day - 1); setExpandedSection(null); setJournalText(""); }}>
+                    ← Day {dayData.day - 1}
+                  </button>
+                )}
+                {dayData.day < 21 && (
+                  <button className="ab-day-nav-btn" onClick={() => { saveCurrentDay(dayData.day + 1); setExpandedSection(null); setJournalText(""); }}>
+                    Day {dayData.day + 1} →
+                  </button>
+                )}
+              </div>
+            </>
+          )}
+
+          {/* ── JOURNAL VIEW ── */}
+          {view === "journal" && (
+            <>
+              <div className="ab-header">
+                <div className="ab-logo" style={{ fontSize: 22 }}>Journal</div>
+                <div className="ab-subtitle">Your Abundance Reflections</div>
+              </div>
+              {Object.keys(journalEntries).length === 0 ? (
+                <div style={{ textAlign: "center", color: "#666", padding: "40px 0", fontSize: 14 }}>
+                  No entries yet. Start a day and write your reflections.
+                </div>
+              ) : (
+                Object.entries(journalEntries).sort(([a],[b]) => Number(a) - Number(b)).map(([day, text]) => (
+                  <div key={day} className="ab-journal-entry">
+                    <div className="ab-journal-entry-day">Day {day} — {DAYS[day-1]?.title}</div>
+                    <div className="ab-journal-entry-text">{text}</div>
+                  </div>
+                ))
+              )}
+            </>
+          )}
+
+          {/* ── PROGRESS VIEW ── */}
+          {view === "progress" && (
+            <>
+              <div className="ab-header">
+                <div className="ab-logo" style={{ fontSize: 22 }}>Progress</div>
+                <div className="ab-subtitle">Your Transformation Journey</div>
+              </div>
+
+              <div className="ab-streak">
+                <div className="ab-streak-num ab-shimmer">{completedCount}</div>
+                <div className="ab-streak-label">Days Completed</div>
+              </div>
+
+              <div className="ab-divider" />
+              <div className="ab-section-title">21-Day Map</div>
+              <div className="ab-calendar-grid">
+                {DAYS.map(d => (
+                  <div key={d.day}
+                    className={`ab-cal-day ${completedDays[d.day] ? "done" : ""} ${d.day === currentDay ? "today" : ""}`}
+                    onClick={() => { saveCurrentDay(d.day); setView("day"); }}
+                    title={d.title}
+                  >
+                    {completedDays[d.day] ? "✓" : d.day}
+                  </div>
+                ))}
+              </div>
+
+              <div className="ab-divider" />
+              <div className="ab-section-title">Milestones</div>
+              {[
+                { at: 7, label: "Week 1 — Awakening Complete", desc: "You've identified and begun dissolving your scarcity programming" },
+                { at: 14, label: "Week 2 — Deepening Complete", desc: "Your abundance thermostat has been recalibrated to a higher setting" },
+                { at: 21, label: "Week 3 — Fully Rewired", desc: "Your new money identity is installed and running" },
+              ].map(m => {
+                const done = completedCount >= m.at;
+                return (
+                  <div key={m.at} className="ab-day-card" style={{ opacity: done ? 1 : 0.4, cursor: "default" }}>
+                    <div className="ab-day-num" style={done ? { background: "#D4AF37", color: "#0A0A0A" } : {}}>
+                      {done ? "✓" : m.at}
+                    </div>
+                    <div className="ab-day-info">
+                      <div className="ab-day-title">{m.label}</div>
+                      <div className="ab-day-focus">{m.desc}</div>
+                    </div>
+                  </div>
+                );
+              })}
+
+              <div style={{ textAlign: "center", marginTop: 32 }}>
+                <button className="ab-reset-btn" onClick={async () => {
+                  if (confirm("Reset all progress? This cannot be undone.")) {
+                    await saveCompleted({});
+                    await saveJournal({});
+                    saveCurrentDay(1);
+                  }
+                }}>Reset All Progress</button>
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* ── NAV ── */}
+        <div className="ab-nav">
+          {[
+            { key: "home", icon: "◈", label: "Days" },
+            { key: "journal", icon: "✎", label: "Journal" },
+            { key: "progress", icon: "◉", label: "Progress" },
+          ].map(n => (
+            <button key={n.key} className={`ab-nav-btn ${view === n.key ? "active" : ""}`}
+              onClick={() => setView(n.key)}>
+              <span className="ab-nav-icon">{n.icon}</span>
+              {n.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+};
+
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+</script>
+</body>
+</html>
