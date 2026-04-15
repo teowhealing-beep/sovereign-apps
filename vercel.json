@@ -1,8 +1,0 @@
-{
-  "version": 2,
-  "name": "sovereign-apps",
-  "routes": [
-    { "src": "/abundance", "dest": "/abundance/index.html" },
-    { "src": "/bible", "dest": "/bible/index.html" }
-  ]
-}
