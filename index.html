@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>The Word — 90 Day Bible Reading Plan</title>
+<title>ABUNDANCE — 21 Day Money Reprogramming</title>
 <style>
   html { -webkit-text-size-adjust: 100%; }
   body { margin: 0; padding: 0; }
@@ -29,454 +29,727 @@ async function localSet(key, value) {
 }
 
 
-// ── 90-Day Bible Reading Plan ──────────────────────
-// Month 1: Foundations — Genesis through Psalms, Gospel of John
-// Month 2: Prophets & Early Church — Isaiah, Luke, Acts, Romans, Corinthians
-// Month 3: Completion — Remaining Gospels, Epistles, Revelation
-
-const PLAN = [
-  // WEEK 1-2: GENESIS
-  { day:1, ref:"Genesis 1-3", title:"Creation & The Fall", theme:"Origins", month:1, ctx:"The foundation of everything — God creates, humanity falls, and the promise of restoration begins. Notice: God creates through SPEAKING. Words have creative power. The serpent's strategy is to make Eve question God's word." },
-  { day:2, ref:"Genesis 4-8", title:"Sin Spreads, The Flood", theme:"Judgement & Mercy", month:1, ctx:"Sin escalates rapidly from Cain to the entire world. But God preserves a remnant — Noah. Pattern: judgement is always paired with mercy and a fresh start." },
-  { day:3, ref:"Genesis 9-12", title:"Babel to Abraham's Call", theme:"Covenant Begins", month:1, ctx:"Babel: humanity tries to reach God on their terms. God scatters them, then calls ONE man — Abraham — through whom ALL nations will be blessed. This promise drives the entire Bible." },
-  { day:4, ref:"Genesis 13-18", title:"Abraham's Promise & Covenant", theme:"Faith", month:1, ctx:"God cuts covenant with Abraham (ch 15) — a binding, unbreakable promise. Abraham believes God and it's credited as righteousness. This concept reappears in Romans as the foundation of Christian faith." },
-  { day:5, ref:"Genesis 19-24", title:"Sodom, Isaac & The Test", theme:"Obedience", month:1, ctx:"The binding of Isaac (ch 22) is one of Scripture's most profound moments — foreshadowing God offering His own Son. Abraham's willingness to trust God with his greatest treasure is the gold standard of faith." },
-  { day:6, ref:"Genesis 25-30", title:"Jacob & Esau", theme:"God's Sovereignty", month:1, ctx:"God chooses the younger, flawed Jacob over Esau — showing divine purposes don't follow human conventions. Jacob's name means 'deceiver' but God renames him Israel — 'he who wrestles with God.'" },
-  { day:7, ref:"Genesis 31-36", title:"Jacob Transformed", theme:"Wrestling with God", month:1, ctx:"Jacob physically wrestles with God and is forever changed — he walks with a limp. The message: encountering God transforms you, but it costs something. You don't leave unchanged." },
-  { day:8, ref:"Genesis 37-41", title:"Joseph's Suffering & Rise", theme:"Providence", month:1, ctx:"Joseph is betrayed, enslaved, imprisoned — yet every setback positions him for purpose. The Bible's most powerful statement on suffering: 'You intended it for harm, but God intended it for good' (50:20)." },
-  { day:9, ref:"Genesis 42-50", title:"Reconciliation & Egypt", theme:"Redemption", month:1, ctx:"Joseph forgives his brothers — a preview of the gospel. The family ends up in Egypt, setting up Exodus. Notice: God's plan often takes detours through suffering before arriving at purpose." },
-
-  // WEEK 3-4: EXODUS
-  { day:10, ref:"Exodus 1-4", title:"Moses & The Burning Bush", theme:"Calling", month:1, ctx:"God hears His people's suffering and calls a reluctant leader. Moses' objections mirror our own: 'Who am I? What if they don't believe me? I'm not a good speaker.' God's answer: 'I AM.'" },
-  { day:11, ref:"Exodus 5-10", title:"The Plagues", theme:"God vs False Gods", month:1, ctx:"Each plague targets a specific Egyptian deity — the Nile god, the sun god, etc. This isn't random destruction; it's a systematic dismantling of everything Egypt worshipped instead of the true God." },
-  { day:12, ref:"Exodus 11-14", title:"Passover & Red Sea", theme:"Deliverance", month:1, ctx:"The Passover lamb's blood protects Israel from death — directly foreshadowing Jesus as 'the Lamb of God.' The Red Sea crossing is THE defining act of God in the Old Testament, referenced constantly." },
-  { day:13, ref:"Exodus 15-20", title:"Wilderness & Ten Commandments", theme:"Law & Order", month:1, ctx:"The Ten Commandments aren't arbitrary rules — they're the relational framework for a free people. First 4: relationship with God. Last 6: relationship with each other. Freedom requires boundaries." },
-  { day:14, ref:"Exodus 21-28", title:"Laws & The Tabernacle", theme:"Holiness", month:1, ctx:"The detailed laws seem tedious but reveal God's concern for justice, the vulnerable, and daily life. The Tabernacle design shows God's desire to DWELL among His people — a theme that climaxes in Jesus." },
-  { day:15, ref:"Exodus 29-34", title:"Golden Calf & Renewal", theme:"Faithlessness & Forgiveness", month:1, ctx:"Israel worships a golden calf weeks after the Red Sea — showing how quickly humans default to idolatry. Yet God renews the covenant. His self-description (34:6-7) is the most quoted verse IN the Bible BY the Bible." },
-  { day:16, ref:"Exodus 35-40", title:"Building God's Dwelling", theme:"Obedience in Detail", month:1, ctx:"The Tabernacle is completed and God's glory fills it. Key image: God's presence moves with His people. The whole structure points toward Jesus ('the Word became flesh and TABERNACLED among us' — John 1:14)." },
-
-  // WEEK 5: PSALMS SELECTIONS
-  { day:17, ref:"Psalms 1-8", title:"The Way of the Righteous", theme:"Worship & Wonder", month:1, ctx:"Psalm 1 sets up the entire book: two paths, two outcomes. Psalm 8 asks the fundamental human question — 'What is mankind that you are mindful of them?' The Psalms are the Bible's emotional centre." },
-  { day:18, ref:"Psalms 19-27", title:"God in Creation & Crisis", theme:"Trust", month:1, ctx:"Psalm 22 opens with 'My God, why have you forsaken me?' — the exact words Jesus quotes on the cross. Read it as a prophecy of crucifixion written 1000 years before. Psalm 23 is the most famous chapter in the Bible." },
-  { day:19, ref:"Psalms 32, 37, 40, 42-43", title:"Wrestling with Doubt", theme:"Honest Prayer", month:1, ctx:"These psalms model honest prayer — depression, doubt, waiting. 'Why are you downcast, O my soul?' (42:5) shows that faith and emotional struggle coexist. The Psalms give you permission to bring your real self to God." },
-  { day:20, ref:"Psalms 46, 51, 63, 84, 90-91", title:"Repentance & Refuge", theme:"Restoration", month:1, ctx:"Psalm 51 — David's prayer after his greatest failure — is the Bible's most raw confession. Psalm 91 is about divine protection. Psalm 90 gives perspective: 'Teach us to number our days.'" },
-  { day:21, ref:"Psalms 100, 103, 119:1-48, 121, 139", title:"Praise & God's Word", theme:"Devotion", month:1, ctx:"Psalm 103 catalogues God's character. Psalm 119 is the longest chapter in the Bible — an epic love letter to God's word. Psalm 139 reveals that God knows you completely and is inescapable." },
-
-  // WEEK 6: PROVERBS
-  { day:22, ref:"Proverbs 1-4", title:"Wisdom's Call", theme:"Wisdom", month:1, ctx:"Proverbs personifies Wisdom as a woman calling out in the streets. 'The fear of the Lord is the beginning of wisdom' (1:7) is the book's thesis. Fear here means reverent awe, not terror." },
-  { day:23, ref:"Proverbs 5-9", title:"Wisdom vs Folly", theme:"Choices", month:1, ctx:"Two women compete for your attention: Lady Wisdom and Lady Folly. Every decision is choosing which one to follow. Proverbs 8 presents Wisdom as present at creation — early Christians saw Jesus here." },
-  { day:24, ref:"Proverbs 10-15", title:"Practical Wisdom", theme:"Daily Life", month:1, ctx:"Short, punchy sayings covering money, speech, work, relationships. These aren't promises — they're principles. 'Generally, this is how life works.' Read them slowly; each one deserves a pause." },
-  { day:25, ref:"Proverbs 16-22", title:"Leadership & Character", theme:"Integrity", month:1, ctx:"Rich material on leadership, humility, and the power of words. 'Pride goes before destruction' (16:18). 'A good name is more desirable than great riches' (22:1). Timeless business and life wisdom." },
-  { day:26, ref:"Proverbs 23-31", title:"Warnings & The Worthy Woman", theme:"Excellence", month:1, ctx:"Chapter 31 — the 'Proverbs 31 woman' — is actually an acrostic poem about Wisdom personified, though it's often read as a checklist for women. She's entrepreneurial, generous, and fearless." },
-
-  // WEEK 7-8: GOSPEL OF JOHN
-  { day:27, ref:"John 1-3", title:"The Word Made Flesh", theme:"Incarnation", month:1, ctx:"John's opening echoes Genesis 1 — 'In the beginning was the Word.' Jesus IS the Word through whom everything was created. John 3:16 is the gospel in one sentence. Nicodemus represents intellectual faith seeking deeper understanding." },
-  { day:28, ref:"John 4-6", title:"Living Water & Bread of Life", theme:"Satisfaction", month:1, ctx:"The Samaritan woman encounter breaks every social convention. Jesus offers what the world can't — living water (satisfaction) and bread of life (sustenance). He feeds 5000 then says HE is the real bread." },
-  { day:29, ref:"John 7-9", title:"Light of the World", theme:"Truth", month:1, ctx:"Escalating conflict with religious leaders. Jesus heals a blind man on the Sabbath, provoking fury. The healed man's testimony is beautifully simple: 'I was blind but now I see.' Sometimes that's enough." },
-  { day:30, ref:"John 10-12", title:"Good Shepherd & Lazarus", theme:"Life & Death", month:1, ctx:"Jesus claims to be the Good Shepherd AND the resurrection. Raising Lazarus is the sign that triggers the plot to kill him. The irony: the one who gives life is sentenced to death FOR giving life." },
-
-  // MONTH 2 — DEEPENING
-  { day:31, ref:"John 13-15", title:"The Last Supper & True Vine", theme:"Love & Abiding", month:2, ctx:"Jesus washes feet (the ultimate leadership model), gives the new commandment ('love one another'), and teaches the vine metaphor — fruitfulness comes from connection, not effort." },
-  { day:32, ref:"John 16-18", title:"The Spirit & Arrest", theme:"The Helper", month:2, ctx:"Jesus promises the Holy Spirit and prays His most intimate prayer (ch 17). Then Gethsemane and arrest. Notice Peter's bravado vs his denial — the gap between intention and action." },
-  { day:33, ref:"John 19-21", title:"Cross & Resurrection", theme:"Victory", month:2, ctx:"John's crucifixion account emphasises Jesus' control — 'It is finished' is a declaration of completion, not defeat. The resurrection appearances are personal: Mary at the tomb, Thomas' doubt resolved, Peter restored." },
-
-  // WEEK 9-10: ISAIAH (selections)
-  { day:34, ref:"Isaiah 1-6", title:"Holy, Holy, Holy", theme:"God's Holiness", month:2, ctx:"Isaiah's throne room vision (ch 6) is the Bible's most awe-inspiring scene. 'Holy, holy, holy' — the only attribute of God repeated three times. Isaiah's response: 'I am undone.' Encountering God's holiness reveals our need." },
-  { day:35, ref:"Isaiah 7-12", title:"Immanuel & The Coming King", theme:"Messianic Hope", month:2, ctx:"'A virgin will conceive' (7:14) and 'For unto us a child is born' (9:6) — Israel's most famous messianic prophecies. Written 700 years before Jesus. 'Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace.'" },
-  { day:36, ref:"Isaiah 25-26, 35, 40", title:"Comfort My People", theme:"Restoration", month:2, ctx:"Chapter 40 is one of the Bible's greatest chapters: 'Comfort, comfort my people... those who hope in the Lord will renew their strength.' After judgement comes restoration — always." },
-  { day:37, ref:"Isaiah 42-45", title:"The Servant & The Creator", theme:"Servant Leadership", month:2, ctx:"The 'Servant Songs' describe a mysterious figure who will bring justice gently, suffer for others, and be a light to the nations. Christians read these as prophecy of Jesus." },
-  { day:38, ref:"Isaiah 49-53", title:"The Suffering Servant", theme:"Atonement", month:2, ctx:"Isaiah 53 is THE most important Old Testament prophecy for Christians — written 700 years before the cross, it describes someone who bears others' suffering, is 'pierced for our transgressions,' and brings healing." },
-  { day:39, ref:"Isaiah 55-58, 61", title:"Invitation & Justice", theme:"True Worship", month:2, ctx:"'Come, all you who are thirsty' (55:1) — God's open invitation. Chapter 58 defines true worship: not ritual but justice, feeding the hungry, freeing the oppressed. Jesus quotes 61 as His mission statement." },
-  { day:40, ref:"Isaiah 60, 62, 65-66", title:"The New Creation", theme:"Future Hope", month:2, ctx:"Isaiah ends with a vision of new heavens and new earth — which Revelation picks up and expands. 'The former things will not be remembered.' The biblical story arc: creation → fall → redemption → new creation." },
-
-  // WEEK 11-12: LUKE
-  { day:41, ref:"Luke 1-2", title:"Birth Narratives", theme:"Humble Beginnings", month:2, ctx:"Luke is the historian — detailed, orderly, concerned with the marginalised. Mary's Magnificat (1:46-55) is revolutionary: God lifts the humble and scatters the proud. Jesus arrives not in a palace but a feeding trough." },
-  { day:42, ref:"Luke 3-5", title:"Baptism & Early Ministry", theme:"Identity & Mission", month:2, ctx:"At baptism, God declares Jesus' identity BEFORE any ministry begins. Luke then gives Jesus' genealogy all the way back to Adam — making Jesus everyone's story, not just Israel's. He calls his first followers." },
-  { day:43, ref:"Luke 6-8", title:"Sermon & Parables", theme:"Kingdom Values", month:2, ctx:"Luke's version of the sermon includes 'Blessed are the poor' (not 'poor in spirit' as in Matthew) — Luke consistently emphasises God's concern for the literally poor and oppressed. Parables begin revealing kingdom mysteries." },
-  { day:44, ref:"Luke 9-11", title:"Transfiguration & Teaching", theme:"Revelation", month:2, ctx:"Peter sees Jesus' glory on the mountain, then Jesus 'sets his face toward Jerusalem' — knowing what awaits. The Lord's Prayer (11:1-4) is given. Jesus teaches about persistence in prayer." },
-  { day:45, ref:"Luke 12-15", title:"Parables of Lost Things", theme:"God's Heart", month:2, ctx:"Chapter 15 is the Bible's most beautiful chapter — three stories of things lost and found, climaxing in the Prodigal Son. The real hero isn't the lost son but the running father. This IS the gospel." },
-  { day:46, ref:"Luke 16-19", title:"Rich & Poor, Zacchaeus", theme:"Money & Salvation", month:2, ctx:"Luke has more to say about money than any gospel. The rich man and Lazarus, the unjust steward, Zacchaeus — all challenge our relationship with wealth. 'You cannot serve both God and money.'" },
-  { day:47, ref:"Luke 20-22", title:"Last Week & Last Supper", theme:"Confrontation", month:2, ctx:"Jesus enters Jerusalem, cleanses the temple, and engages in final debates. The Last Supper institutes communion. In Gethsemane, Luke alone records Jesus sweating blood — the physician noting the medical detail." },
-  { day:48, ref:"Luke 23-24", title:"Cross & Road to Emmaus", theme:"Death & Recognition", month:2, ctx:"Luke's unique contribution: the thief on the cross ('Today you will be with me in paradise') and the Road to Emmaus — where Jesus is recognised in the breaking of bread. The resurrection changes everything." },
-
-  // WEEK 13-14: ACTS
-  { day:49, ref:"Acts 1-3", title:"Pentecost", theme:"The Spirit Arrives", month:2, ctx:"Acts is Luke's sequel — what happens AFTER Jesus. The Holy Spirit arrives at Pentecost and the church explodes from 120 to 3000 in one day. Peter — who denied Jesus — now preaches fearlessly. The Spirit transforms." },
-  { day:50, ref:"Acts 4-7", title:"Early Church & Stephen", theme:"Courage", month:2, ctx:"The first Christians share everything, heal the sick, and face persecution. Stephen becomes the first martyr — and at his death, a man named Saul watches approvingly. This sets up the greatest conversion in history." },
-  { day:51, ref:"Acts 8-10", title:"Gospel Spreads", theme:"Breaking Barriers", month:2, ctx:"Philip reaches the Samaritans and an Ethiopian eunuch. Saul's dramatic conversion on the Damascus road (ch 9). Peter's vision (ch 10): God declares nothing and no one 'unclean.' The gospel crosses every boundary." },
-  { day:52, ref:"Acts 11-14", title:"Antioch & First Journey", theme:"Mission", month:2, ctx:"Antioch becomes the first multicultural church. Paul and Barnabas launch the first missionary journey. The pattern: preach in synagogues, face rejection from some Jews, turn to Gentiles. The gospel goes global." },
-  { day:53, ref:"Acts 15-18", title:"Jerusalem Council & Europe", theme:"Inclusion", month:2, ctx:"The Jerusalem Council (ch 15) is the church's most important decision: Gentiles don't need to become Jews first. Paul enters Europe for the first time. The Philippian jailer's conversion: 'What must I do to be saved?'" },
-  { day:54, ref:"Acts 19-22", title:"Ephesus & Jerusalem", theme:"Conflict", month:2, ctx:"Paul's ministry in Ephesus causes a riot — the gospel disrupts economic systems built on false worship. Paul returns to Jerusalem knowing arrest awaits. His farewell speech to Ephesian elders is deeply moving." },
-  { day:55, ref:"Acts 23-28", title:"Trials & Rome", theme:"Perseverance", month:2, ctx:"Paul is arrested, tried before governors and kings, shipwrecked, bitten by a snake — and still arrives in Rome preaching. Acts ends abruptly with Paul under house arrest but still teaching. The story continues through US." },
-
-  // WEEK 15-16: ROMANS
-  { day:56, ref:"Romans 1-3", title:"All Have Sinned", theme:"Universal Need", month:2, ctx:"Paul's masterwork. Chapters 1-3 establish that EVERYONE — Jew and Gentile alike — is guilty before God. 'All have sinned and fall short of the glory of God' (3:23). This levels the playing field completely." },
-  { day:57, ref:"Romans 4-5", title:"Faith & Grace", theme:"Justification", month:2, ctx:"Abraham was justified by FAITH, not works — before the law existed. 'While we were still sinners, Christ died for us' (5:8). Grace isn't earned; it's received. This chapter changed Martin Luther's life and sparked the Reformation." },
-  { day:58, ref:"Romans 6-8", title:"Freedom & The Spirit", theme:"Transformation", month:2, ctx:"Chapter 8 is considered the greatest chapter in the Bible by many theologians. 'No condemnation... nothing can separate us from the love of God.' The Spirit helps our weakness. All things work together for good." },
-  { day:59, ref:"Romans 9-11", title:"Israel's Story", theme:"God's Faithfulness", month:2, ctx:"Paul wrestles with why Israel largely rejected Jesus. His conclusion: God's plans are bigger than we understand, and He hasn't abandoned Israel. 'Oh, the depth of the riches of the wisdom of God!' (11:33)." },
-  { day:60, ref:"Romans 12-16", title:"Living It Out", theme:"Practical Faith", month:2, ctx:"'Be transformed by the renewing of your mind' (12:2). After 11 chapters of theology, Paul gets practical: use your gifts, love genuinely, overcome evil with good, respect authorities, bear with the weak. Faith has feet." },
-
-  // MONTH 3 — COMPLETION
-  // WEEK 17: MATTHEW (selected)
-  { day:61, ref:"Matthew 1-4", title:"Birth & Temptation", theme:"Kingship", month:3, ctx:"Matthew writes for Jews, presenting Jesus as the promised King. The genealogy connects Jesus to Abraham and David. Jesus' temptation shows how to resist — with Scripture. Every temptation is countered with 'It is written.'" },
-  { day:62, ref:"Matthew 5-7", title:"Sermon on the Mount", theme:"Kingdom Ethics", month:3, ctx:"The most famous sermon ever preached. The Beatitudes flip worldly values upside down. 'You have heard it said... but I say' — Jesus doesn't abolish the law; He fulfils and deepens it. The narrow gate. Building on rock." },
-  { day:63, ref:"Matthew 13-14", title:"Parables of the Kingdom", theme:"Hidden Treasure", month:3, ctx:"Seven parables reveal what God's kingdom is LIKE — a tiny seed that becomes huge, yeast that transforms dough, treasure worth selling everything for. The kingdom is both here and coming, hidden and growing." },
-  { day:64, ref:"Matthew 16-18", title:"Peter's Confession & Church", theme:"Identity", month:3, ctx:"'Who do you say I am?' — the pivotal question of the gospels. Peter's answer: 'The Christ, the Son of the living God.' Jesus then reveals the cost: 'Take up your cross and follow me.' Glory follows suffering." },
-  { day:65, ref:"Matthew 24-25", title:"End Times & Parables", theme:"Readiness", month:3, ctx:"Jesus teaches about the end of the age. The key message isn't detailed prediction but readiness — the wise virgins, the faithful servants, the sheep and goats. The surprise: serving 'the least of these' IS serving Christ." },
-  { day:66, ref:"Matthew 26-28", title:"Passion & Commission", theme:"Authority", month:3, ctx:"Matthew's resurrection account ends with the Great Commission: 'All authority has been given to me... Go and make disciples of ALL nations.' The story doesn't end — it's handed to us. The mission continues." },
-
-  // WEEK 18: MARK
-  { day:67, ref:"Mark 1-4", title:"Immediate Action", theme:"Urgency", month:3, ctx:"Mark's favourite word is 'immediately' — everything moves fast. Jesus bursts onto the scene healing, casting out demons, and calling followers. Mark presents Jesus as the suffering servant in ACTION." },
-  { day:68, ref:"Mark 5-8", title:"Miracles & Misunderstanding", theme:"Faith & Doubt", month:3, ctx:"Dramatic miracles — the demoniac, the bleeding woman, feeding thousands. Yet the disciples consistently misunderstand. Mark's honest portrayal of confused followers is encouraging: understanding comes gradually." },
-  { day:69, ref:"Mark 9-12", title:"Transfiguration to Temple", theme:"True Greatness", month:3, ctx:"'Whoever wants to be first must be last.' Jesus repeatedly redefines greatness as service. The widow's two coins are worth more than large donations — God measures generosity by sacrifice, not amount." },
-  { day:70, ref:"Mark 13-16", title:"Passion & Empty Tomb", theme:"Mystery", month:3, ctx:"Mark's original ending (16:8) is abrupt — the women flee the empty tomb in fear. It's deliberately unsettling. Mark leaves you with a choice: will you believe and follow, or will you run?" },
-
-  // WEEK 19: KEY EPISTLES
-  { day:71, ref:"1 Corinthians 1-6", title:"Church Problems", theme:"Unity", month:3, ctx:"Corinth was a mess — divisions, lawsuits between Christians, sexual immorality. Paul addresses real-world church dysfunction. The cross is 'foolishness to the world but the power of God.' Relevant 2000 years later." },
-  { day:72, ref:"1 Corinthians 7-11", title:"Marriage & Worship", theme:"Order", month:3, ctx:"Practical guidance on relationships, food offered to idols, and worship. The principle: 'Everything is permissible but not everything is beneficial.' Freedom has limits when it harms others." },
-  { day:73, ref:"1 Corinthians 12-16", title:"Love & Resurrection", theme:"Love", month:3, ctx:"Chapter 13 — the 'love chapter' — is the Bible's most read passage at weddings, but it's actually about spiritual gifts, not romance. Chapter 15 is Paul's thesis on resurrection: 'If Christ has not been raised, our faith is futile.'" },
-  { day:74, ref:"Galatians 1-3", title:"Freedom in Christ", theme:"Grace vs Law", month:3, ctx:"Paul's most passionate letter — written in anger. Churches were returning to law-keeping for salvation. 'You foolish Galatians!' Grace alone, through faith alone. Adding requirements to the gospel destroys the gospel." },
-  { day:75, ref:"Galatians 4-6", title:"Living Free", theme:"Spirit-Led Life", month:3, ctx:"'It is for freedom that Christ has set us free.' The fruit of the Spirit (5:22-23) is the character profile of a healthy spiritual life: love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, self-control." },
-  { day:76, ref:"Ephesians 1-3", title:"Spiritual Blessings", theme:"Identity in Christ", month:3, ctx:"Paul's most elevated theology — written from prison. 'Blessed with every spiritual blessing... chosen before creation... saved by grace through faith, not works.' This section defines who you ARE in Christ." },
-  { day:77, ref:"Ephesians 4-6", title:"Walk Worthy & Armour", theme:"Spiritual Warfare", month:3, ctx:"Practical application: unity, honest speech, pure living, healthy relationships. The armour of God (ch 6) equips you for spiritual battle — truth, righteousness, gospel, faith, salvation, the Word, and prayer." },
-  { day:78, ref:"Philippians 1-4", title:"Joy in Suffering", theme:"Joy", month:3, ctx:"Written from prison, yet the word 'joy' appears 16 times. The Christ Hymn (2:5-11) is the earliest Christian creed. 'I can do all things through Christ' (4:13) — in context, it means contentment in ANY circumstance, not superhuman ability." },
-
-  // WEEK 20: MORE EPISTLES
-  { day:79, ref:"Colossians 1-4", title:"Christ Supreme", theme:"Supremacy", month:3, ctx:"Jesus is 'the image of the invisible God, the firstborn over all creation' (1:15). Paul combats false teaching by elevating Christ above everything. If Christ is supreme, nothing else can claim ultimate allegiance." },
-  { day:80, ref:"1 Thessalonians + 2 Thessalonians", title:"Hope & Christ's Return", theme:"Hope", month:3, ctx:"Paul's earliest letters, written to encourage persecuted believers. The dead in Christ will rise first, then those alive will be caught up together. Encouragement: 'Comfort one another with these words.'" },
-  { day:81, ref:"Hebrews 1-7", title:"Jesus Greater Than All", theme:"Superiority", month:3, ctx:"An unknown author argues that Jesus is greater than angels, Moses, and the priesthood. The argument builds systematically: everything in the Old Testament POINTED to Jesus. He is the reality the shadows anticipated." },
-  { day:82, ref:"Hebrews 8-13", title:"New Covenant & Faith Hall", theme:"Faith in Action", month:3, ctx:"The new covenant replaces the old. Chapter 11 — the 'faith hall of fame' — chronicles believers who trusted God without seeing the promise fulfilled. 'Faith is the substance of things hoped for, the evidence of things not seen.'" },
-  { day:83, ref:"James 1-5", title:"Faith That Works", theme:"Practical Wisdom", month:3, ctx:"James is the Bible's most practical book — Proverbs meets the gospel. 'Faith without works is dead.' Control your tongue. Don't show favouritism to the rich. Patience in suffering. The prayer of faith heals." },
-
-  // WEEK 21: FINAL LETTERS & REVELATION
-  { day:84, ref:"1 Peter 1-5", title:"Suffering & Hope", theme:"Endurance", month:3, ctx:"Written to persecuted Christians. 'You are a chosen people, a royal priesthood.' Suffering is temporary but produces proven character. 'Cast all your anxiety on him because he cares for you.'" },
-  { day:85, ref:"1 John 1-5", title:"God Is Love", theme:"Assurance", month:3, ctx:"'God is light' and 'God is love' — John's two defining statements. This letter gives tests for genuine faith: Do you love others? Do you obey? Do you believe Jesus came in the flesh? Love is the ultimate test." },
-  { day:86, ref:"Revelation 1-3", title:"Vision of Christ & Seven Churches", theme:"Revelation", month:3, ctx:"The risen Christ — eyes like fire, voice like rushing waters — addresses seven real churches. Each letter follows a pattern: I know your works, here's your strength, here's your weakness, here's your promise. Relevant to churches today." },
-  { day:87, ref:"Revelation 4-7", title:"Throne Room & Seals", theme:"Worship", month:3, ctx:"Heaven's throne room is the Bible's most spectacular scene. The Lamb (Jesus) is the only one worthy to open the scroll. The seals begin judgement. Chapter 7: a multitude from EVERY nation worships — the fulfilment of God's promise to Abraham." },
-  { day:88, ref:"Revelation 8-14", title:"Trumpets & Conflict", theme:"Cosmic Battle", month:3, ctx:"Intensifying judgement and cosmic warfare. The woman and the dragon (ch 12) symbolise the spiritual conflict behind human history. The beast represents oppressive human power structures that oppose God." },
-  { day:89, ref:"Revelation 15-19", title:"Bowls & Babylon Falls", theme:"Justice", month:3, ctx:"Final judgement poured out. Babylon (representing all corrupt human systems) falls. 'Hallelujah! For our Lord God Almighty reigns.' The rider on the white horse (Jesus) brings ultimate justice." },
-  { day:90, ref:"Revelation 20-22", title:"New Heaven & New Earth", theme:"Restoration Complete", month:3, ctx:"The Bible ends where it began — paradise, but better. No more death, mourning, crying, or pain. The tree of life from Genesis returns. God dwells WITH humanity forever. 'He will wipe every tear from their eyes.' The story ends with an invitation: 'Come.'" },
+const DAYS = [
+  {
+    day: 1,
+    title: "The Frequency of Wealth",
+    focus: "Awareness",
+    morningPractice: "Write down your current dominant money belief. Be brutally honest. Is it 'Money is hard to earn'? 'Rich people are greedy'? 'There's never enough'? Identify THE belief that runs your financial life.",
+    affirmation: "I am shifting my money frequency today. Every thought I think about money is creating my financial future, and I choose abundance now.",
+    exercise: "Count every piece of money you currently have — in your wallet, accounts, coins in drawers. Write the EXACT total. Then say out loud: 'Thank you for this money. More is coming.'",
+    visualization: "Close your eyes for 3 minutes. See your bank account with your ideal balance. Feel the relief, the freedom, the calm. Let that feeling wash through your entire body.",
+    eveningReflection: "What negative money thought came up most today? Write it down, then write its opposite. The opposite is your new truth.",
+    keyTeaching: "Your current financial situation is a printout of your past thoughts about money. Every dollar in your life was attracted by your dominant money frequency. Today we begin changing the signal you're broadcasting."
+  },
+  {
+    day: 2,
+    title: "Gratitude Is The Bridge",
+    focus: "Gratitude",
+    morningPractice: "List 10 things money has already given you — a roof, food, your phone, transport, education. Feel genuine gratitude for each one. Gratitude for what you HAVE is the fastest frequency shift.",
+    affirmation: "I am so grateful for the abundance that already fills my life. Money flows to me because I appreciate every dollar that comes my way.",
+    exercise: "Every time you spend money today — coffee, groceries, petrol — say 'Thank you, money, for allowing me this.' Transform every transaction into a gratitude moment.",
+    visualization: "Imagine opening your mail and seeing a cheque for $10,000. Feel the surprise, the joy, the gratitude. Hold that feeling for 60 seconds.",
+    eveningReflection: "How many times did you catch yourself complaining about money or prices today? Awareness is the first step to change.",
+    keyTeaching: "Rhonda teaches that gratitude is the single most powerful practice for attracting abundance. You cannot feel grateful and feel lack at the same time — they're different frequencies. Gratitude for money magnetises more money to you."
+  },
+  {
+    day: 3,
+    title: "Delete The Debt Story",
+    focus: "Releasing Resistance",
+    morningPractice: "Write 'I release all fear, guilt, and shame about money' three times. Then write every money worry on a separate piece of paper. Read each one, then physically tear it up or burn it.",
+    affirmation: "I release every old story about money that does not serve my abundant future. I am free from financial fear. My past does not determine my wealth.",
+    exercise: "Today, refuse to say ANYTHING negative about money. Not 'I can't afford it' but 'I'm choosing to spend elsewhere right now.' Not 'That's too expensive' but 'That's not my priority today.'",
+    visualization: "Imagine all your debts and financial worries as heavy stones in a backpack. One by one, see yourself removing each stone and dropping it into a river. Feel yourself getting lighter with each release.",
+    eveningReflection: "What old money story from your childhood surfaced today? Whose voice was it — a parent, teacher, society? Thank that voice for trying to protect you, then let it go.",
+    keyTeaching: "You can't attract abundance while vibrating at the frequency of debt-fear. The Law of Attraction responds to your dominant feeling, not your words. If you SAY 'I want money' but FEEL desperate, the Universe matches the desperation, not the desire."
+  },
+  {
+    day: 4,
+    title: "The Secret Cheque",
+    focus: "Receiving",
+    morningPractice: "Write yourself a cheque for the amount of money you want to receive. Date it, sign it 'The Universe'. Put it where you'll see it every day. This is Rhonda's famous Secret Cheque practice.",
+    affirmation: "I am open to receiving unlimited abundance from expected and unexpected sources. Money comes to me easily, frequently, and in increasing amounts.",
+    exercise: "Practice receiving today — if someone offers to pay, buy you coffee, give you something, say YES and THANK YOU. Don't deflect. Don't say 'Oh you didn't have to.' Just receive gracefully.",
+    visualization: "See money flowing toward you from multiple directions — like rivers converging. From your business, from unexpected windfalls, from opportunities you haven't imagined yet. See yourself calmly receiving it all.",
+    eveningReflection: "Did you notice any resistance to receiving today? Where in your body did you feel it? The ability to receive is a muscle most people have let atrophy.",
+    keyTeaching: "Most people are terrible receivers. They deflect compliments, refuse help, and feel guilty about good fortune. But receiving IS giving — when you receive joyfully, you complete the circuit of abundance and allow the giver their joy."
+  },
+  {
+    day: 5,
+    title: "Act As If",
+    focus: "Embodiment",
+    morningPractice: "Today, carry yourself as someone who has complete financial security. How would you walk? How would you speak? What would your energy feel like? Embody THAT version of yourself from the moment you wake up.",
+    affirmation: "I am wealthy. I carry the energy of abundance in everything I do. Financial freedom is not something I'm chasing — it is who I am becoming.",
+    exercise: "Do ONE thing today that your wealthy self would do — it doesn't have to cost money. Maybe it's taking your time instead of rushing, or choosing quality over cheapness in a small decision, or sitting in stillness instead of hustling anxiously.",
+    visualization: "Step into your future self — 12 months from now when money flows abundantly. What does your morning look like? What are you wearing? How do you feel checking your accounts? Live in that scene for 5 minutes.",
+    eveningReflection: "How did it feel to carry wealthy energy today? What shifted? What felt uncomfortable? Discomfort is just your old identity resisting the upgrade.",
+    keyTeaching: "Rhonda's core teaching: you must BE it before you SEE it. The feeling must come first. Most people wait for money to feel abundant — but that's backwards. The feeling of abundance is the cause; money is the effect."
+  },
+  {
+    day: 6,
+    title: "The Magic Money Multiplier",
+    focus: "Giving",
+    morningPractice: "Find a coin or note on the ground today (or place one where someone will find it). The act of 'finding money' trains your brain that money appears for you. Alternatively, give money away — tip generously, donate, buy someone's coffee.",
+    affirmation: "I circulate money with joy and confidence. Every dollar I give returns to me multiplied. I am a channel through which abundance flows to bless others.",
+    exercise: "Give 3 genuine compliments about others' success or possessions today WITHOUT any jealousy. 'Your business is amazing.' 'Your home is beautiful.' 'You deserve every success.' Celebrating others' abundance opens the door to yours.",
+    visualization: "Imagine yourself as a powerful river of wealth. Money flows IN from the mountains (the Universe) and flows OUT to the ocean (others). You are not a dam hoarding water — you are a mighty flowing river. The more that flows through you, the mightier you become.",
+    eveningReflection: "How did giving feel today? Did any scarcity thoughts arise ('I shouldn't spend that' or 'What if I need it')? Notice them without judgement.",
+    keyTeaching: "Giving is proof to your subconscious mind that you believe in abundance. When you give freely, you declare: 'There is more than enough.' Hoarding and clinging say: 'There isn't enough.' The Universe always agrees with your dominant belief."
+  },
+  {
+    day: 7,
+    title: "Weekly Integration",
+    focus: "Reflection & Reset",
+    morningPractice: "Re-read your Day 1 dominant money belief. Has it shifted at all? Write down any new awareness. Then write 3 money wins from this week — no matter how small (found a coin, had a positive money thought, didn't complain about prices).",
+    affirmation: "Every day my relationship with money improves. I am rewiring decades of programming in real time. I am patient with myself and persistent in my practice.",
+    exercise: "Create a 'Money Wins' note on your phone. From today, log EVERY positive money event — a discount, a refund, found money, a new client enquiry, a sale. Watch how your awareness of incoming money shifts your reality.",
+    visualization: "See yourself one week ago vs now. Notice the subtle energetic shift. Your posture is straighter, your thoughts are cleaner, your relationship with money is changing at the subconscious level. Honour that progress.",
+    eveningReflection: "Rate your money energy this week from 1-10. What was your biggest breakthrough? What's still your biggest block? Write both down honestly.",
+    keyTeaching: "Week 1 is about AWARENESS. You can't change what you can't see. Most people sleepwalk through their financial life running unconscious programs from childhood. You've spent 7 days waking up. That alone is transformative."
+  },
+  {
+    day: 8,
+    title: "Rewrite Your Money Story",
+    focus: "New Narrative",
+    morningPractice: "Write your NEW money story in present tense, as if it's already true: 'I am a woman who attracts wealth effortlessly. My business generates consistent, growing revenue. Money loves me and I love money.' Make it at least a full paragraph.",
+    affirmation: "My new money story is writing itself through me right now. I am the author of my financial destiny and I choose a story of abundance, ease, and overflow.",
+    exercise: "Read your new money story aloud 3 times today — morning, midday, and evening. Each time, FEEL it more deeply. Let your nervous system absorb the new narrative.",
+    visualization: "Imagine your new money story as a movie. You are both the director and the star. See the scenes playing out — your business thriving, deposits landing in your account, making decisions from abundance rather than fear. Watch the whole movie.",
+    eveningReflection: "Which part of your new money story felt most real? Which part felt most like a stretch? The stretch points are exactly where your biggest growth is waiting.",
+    keyTeaching: "Neuroscience confirms what Rhonda teaches: your brain cannot distinguish between a vividly imagined experience and a real one. When you repeatedly tell and FEEL your new money story, you literally rewire neural pathways. You're not pretending — you're pre-paving."
+  },
+  {
+    day: 9,
+    title: "The Abundance Countdown",
+    focus: "Rhonda's Countdown Method",
+    morningPractice: "This is Rhonda's powerful countdown technique: Count backwards from 30 to 1, and with EACH number, name something you're grateful money has provided. Don't repeat. 30 unique things. This floods your system with abundance frequency.",
+    affirmation: "My life is overflowing with evidence of abundance. When I look for wealth, I find it everywhere. The Universe is constantly proving its generosity to me.",
+    exercise: "Carry a $50 or $100 note in your wallet today. Don't spend it. Every time you see it, think 'I could buy...' and mentally spend it on 10 different things. Rhonda's technique: the FEELING of having money to spend is what attracts more.",
+    visualization: "Imagine 30 golden coins floating in front of you. Each one represents something money has given you. Touch each coin and feel gratitude as it glows brighter. By the end, you're surrounded by golden light.",
+    eveningReflection: "Was it easy or hard to find 30 things? If hard, that reveals how much your scarcity lens has been filtering out the abundance that already exists in your life.",
+    keyTeaching: "The countdown method works because counting backwards requires focus — your mind can't wander to worry while counting down AND generating gratitude simultaneously. It's a neurological hack that forces presence and positivity."
+  },
+  {
+    day: 10,
+    title: "Money Loves Speed",
+    focus: "Action & Alignment",
+    morningPractice: "Write down 5 money-making actions you've been procrastinating on. Circle the ONE that scares you most. That's your task today. Inspired action + abundant mindset = accelerated results.",
+    affirmation: "I take inspired, aligned action toward wealth every single day. The Universe rewards my boldness with opportunities, connections, and income beyond my expectations.",
+    exercise: "Do the scary money action you circled. Send that pitch. List that product. Follow up with that lead. Raise your price. Whatever it is — do it TODAY. Mindset without action is just daydreaming.",
+    visualization: "See yourself completing the scary action and it going BRILLIANTLY. The response is better than expected. The outcome exceeds your hopes. Feel the rush of 'I can't believe I almost didn't do this.'",
+    eveningReflection: "Did you do it? If yes — how do you feel? If no — what stopped you? Be honest. The resistance IS the work.",
+    keyTeaching: "Rhonda never teaches passive manifestation. The Universe can't deliver a pizza if you don't open the front door. Attraction + Action = Abundance. Your job is to match your energy AND your effort to the life you want."
+  },
+  {
+    day: 11,
+    title: "Clear The Envy Channel",
+    focus: "Celebrating Others' Wealth",
+    morningPractice: "Think of 3 people who have the financial success you want. Instead of envy, send them genuine gratitude: 'Thank you for showing me what's possible. Your wealth is proof that mine is available too.'",
+    affirmation: "Other people's success is evidence of MY potential. There is no limit to abundance. Someone else's wealth does not diminish mine — it expands what I believe is possible.",
+    exercise: "Follow 3 wealthy/successful people on social media whose content makes you feel INSPIRED rather than envious. Curate your feed to match your desired frequency.",
+    visualization: "See yourself sitting at a table with wealthy, generous people. They're welcoming you warmly, sharing strategies, celebrating your wins. You belong in this room. This is your peer group now.",
+    eveningReflection: "Notice any envy or judgement toward wealthy people today. Where does that come from? Envy is just desire wearing a mask of resentment. Underneath it is 'I want that too' — and that wanting is VALID.",
+    keyTeaching: "Envy is the most destructive frequency for wealth attraction. When you resent someone's money, you're telling the Universe 'money is bad' — so the Universe keeps it away from you. Bless what you want to attract."
+  },
+  {
+    day: 12,
+    title: "The Magnetic Mind",
+    focus: "Thought Discipline",
+    morningPractice: "Set a timer that goes off every hour today. Each time it rings, check: 'What was I just thinking about money?' Log it. You'll be stunned at how much unconscious scarcity thinking still runs in the background.",
+    affirmation: "My mind is a powerful magnet for wealth. I choose my money thoughts deliberately. Every thought is a seed and I only plant abundance.",
+    exercise: "Every time you catch a scarcity thought today, physically snap your fingers and replace it with an abundance thought. Snap = pattern interrupt. New thought = new neural pathway.",
+    visualization: "See your mind as a radio. You've been tuned to 'Scarcity FM' your whole life. Now slowly turn the dial to 'Abundance FM.' The static clears. The signal gets stronger. You hear wealth, opportunity, and possibility clearly.",
+    eveningReflection: "How many scarcity thoughts did you catch today? Celebrate every single one — each catch is your awareness muscle getting stronger. You can't change unconscious thoughts; you can only change the ones you're now conscious of.",
+    keyTeaching: "Rhonda teaches that you have roughly 60,000 thoughts a day, and most are repeats from yesterday. Your financial life is the sum of your repeated money thoughts. Change the dominant thought, change the dominant result."
+  },
+  {
+    day: 13,
+    title: "Quantum Leap Belief",
+    focus: "Expanding Capacity",
+    morningPractice: "Write down your current monthly income goal. Now multiply it by 10. Sit with that number. Notice your body's reaction — tightness? Disbelief? Excitement? Your body reveals your true abundance thermostat.",
+    affirmation: "I expand my capacity for wealth every day. There is no ceiling on what I can earn, receive, and create. I give myself full permission to be extraordinarily wealthy.",
+    exercise: "Research someone in your industry who earns 10x what you currently earn. Study what they do differently. The gap between you and them is not talent — it's belief and strategy.",
+    visualization: "See your income growing like a graph going up — not gradually but in quantum leaps. See the line jump. See months where income doubles, then doubles again. Feel the normalcy of earning abundantly.",
+    eveningReflection: "What's the maximum amount of money you truly believe you can earn in the next 12 months? Write it down. Now ask: who set that limit? Was it you or someone else's voice?",
+    keyTeaching: "Your abundance thermostat was set in childhood and rarely gets updated. Just as a house thermostat kicks in to maintain temperature, your subconscious works to keep you at your 'set point.' These 21 days are resetting your thermostat to a higher setting."
+  },
+  {
+    day: 14,
+    title: "Halfway Integration",
+    focus: "Deep Reset",
+    morningPractice: "You're halfway. Write a letter to money — yes, literally address it as 'Dear Money.' Apologise for resenting it, fearing it, or pushing it away. Tell it you're ready for a new relationship. Commit to treating it with respect and gratitude.",
+    affirmation: "I am halfway through a profound transformation. My relationship with money has already shifted at a cellular level. I honour my progress and trust the process completely.",
+    exercise: "Review your 'Money Wins' log from Day 7. Add everything from this week. Notice: are the wins getting bigger or more frequent? Your reticular activating system is now scanning for abundance instead of lack.",
+    visualization: "See yourself standing at a doorway. Behind you is your old money story — scarcity, struggle, fear. Ahead of you is your new reality — abundance, ease, flow. Step through the doorway. Feel it close behind you. There's no going back.",
+    eveningReflection: "What's the single biggest shift in your money mindset over these 14 days? Write it down. This is evidence that change is happening. Your external results will follow your internal shift.",
+    keyTeaching: "Most people quit programs at the halfway point because the external results haven't caught up with the internal work. But manifestation works like planting seeds — the most important growth happens underground before anything breaks the surface. KEEP GOING."
+  },
+  {
+    day: 15,
+    title: "Wealthy Woman Identity",
+    focus: "Identity Shift",
+    morningPractice: "Define your Wealthy Woman identity in detail. How does she think? What does she believe about money? How does she make decisions? How does she carry herself? Write her full profile — because she is who you're becoming.",
+    affirmation: "I am stepping into my wealthy identity with confidence and grace. This is not a future version of me — she exists NOW, and I am her.",
+    exercise: "Make one decision today as your Wealthy Woman self. It could be how you respond to a business enquiry, how you price something, or how you spend your time. Let HER decide, not your old self.",
+    visualization: "See your Wealthy Woman self standing in front of you. She smiles knowingly. She reaches out and merges with you — her confidence, her ease, her certainty about money flows into every cell of your body. You are one.",
+    eveningReflection: "How did it feel making a decision as your wealthy self? What would have been different if your old self had decided? The gap between those two answers is your growth edge.",
+    keyTeaching: "Identity is the deepest level of change. You don't GET wealth and then become a wealthy person — you become a wealthy person and then wealth follows. Beliefs change behaviour; identity changes everything."
+  },
+  {
+    day: 16,
+    title: "Abundance In Your Body",
+    focus: "Somatic Rewiring",
+    morningPractice: "Place your hand on your heart and breathe deeply 10 times. With each exhale, release physical tension you hold around money — tight shoulders, clenched jaw, knotted stomach. Scarcity lives in the body, not just the mind.",
+    affirmation: "My body is relaxed and open to receiving abundance. I release all physical tension associated with financial stress. Wealth flows through a relaxed, trusting body.",
+    exercise: "Do a body scan 3 times today specifically noticing where you hold money stress. Shoulders? Chest? Gut? Each time, breathe into that area and consciously soften it. Say 'I release this tension. I am safe and supported.'",
+    visualization: "Imagine warm golden light entering through the top of your head and slowly flowing down through your entire body — melting every knot of financial fear, dissolving every tight spot of money worry. By the time it reaches your toes, you're completely relaxed and open.",
+    eveningReflection: "Where does your body hold money stress? How long has it been carrying that? Thank your body for trying to protect you, then remind it: 'We're safe now. Abundance is our new normal.'",
+    keyTeaching: "Trauma and limiting beliefs are stored somatically. Your nervous system may be in fight-or-flight around money without you knowing. Calming the body's money response allows your subconscious to accept new abundance programming."
+  },
+  {
+    day: 17,
+    title: "The 10x Vision Board",
+    focus: "Visual Anchoring",
+    morningPractice: "Spend 20 minutes creating a mental or physical vision board of your 10x financial life. Home, travel, business success, freedom, generosity. Make it VIVID. Details matter — your subconscious responds to specifics.",
+    affirmation: "My abundant future is already real in the quantum field. I see it clearly, I feel it deeply, and I watch it materialise with calm certainty every single day.",
+    exercise: "Screenshot or save 5 images that represent your wealthy life — the home, the travel, the business dashboard showing revenue. Set one as your phone wallpaper. Let your subconscious marinate in the image all day.",
+    visualization: "Walk through your dream home. Touch the surfaces. Open the fridge — it's full. Look out the window — the view is stunning. Check your phone — your business dashboard shows another record month. This is Tuesday. This is just a normal day in your abundant life.",
+    eveningReflection: "Which image from today's vision board made you feel the most emotion? That's your most powerful anchor. Return to it whenever you need a frequency boost.",
+    keyTeaching: "The subconscious mind thinks in pictures, not words. That's why vision boards work — they bypass the logical mind's objections and speak directly to the part of your brain that creates reality. The more vivid the image, the more powerful the programming."
+  },
+  {
+    day: 18,
+    title: "Forgive & Release",
+    focus: "Deep Forgiveness",
+    morningPractice: "Write down the name of everyone who ever made you feel 'not enough' financially — parents who said 'we can't afford it,' partners who controlled money, employers who underpaid you. Then write next to each name: 'I forgive you and I release this block.'",
+    affirmation: "I forgive everyone who contributed to my old money story. They did their best with what they knew. I release all resentment and reclaim my financial power NOW.",
+    exercise: "If possible, have a conversation (real or imagined) with the person who most impacted your money beliefs. Thank them for the lesson. Declare that their chapter in your money story is OVER.",
+    visualization: "See each person who shaped your money story standing in front of you. Cut the energetic cord between you and each one. Watch the cord dissolve into golden light. As each cord is cut, feel yourself become lighter and more free.",
+    eveningReflection: "Who was hardest to forgive? That person holds the key to your biggest breakthrough. Forgiveness isn't about them — it's about freeing YOUR energy for wealth creation.",
+    keyTeaching: "Unforgiveness is an energetic anchor. It literally weighs down your vibration and keeps you connected to old pain. Rhonda teaches that you cannot attract your future while you're energetically chained to your past. Forgiveness is the bolt-cutter."
+  },
+  {
+    day: 19,
+    title: "Overflow Consciousness",
+    focus: "Beyond Enough",
+    morningPractice: "Shift from 'enough' thinking to 'overflow' thinking. Write 10 ways you would use overflow money — beyond your needs. Charity, family, experiences, legacy. When you have PURPOSE for wealth beyond yourself, the Universe responds powerfully.",
+    affirmation: "I don't just attract enough — I attract overflow. Abundance pours into my life so I can give generously, live fully, and create a legacy that blesses generations.",
+    exercise: "Choose a cause or person you will financially support when your overflow arrives. Research it. Get specific. Write down exactly what you'll give and to whom. Make it real in your mind.",
+    visualization: "See yourself writing large cheques to causes you love. See the impact — families helped, communities transformed, futures changed because of YOUR overflow. Feel the profound purpose and joy of being a channel for abundance.",
+    eveningReflection: "How did it feel to plan your overflow giving? Notice: did it feel exciting or 'too far away'? If the latter, you've just found your next belief to upgrade.",
+    keyTeaching: "The Universe is more generous with people who have generous intentions. When your 'WHY' for wealth extends beyond personal comfort to genuine service, you align with the fundamental law of abundance: give and it shall be given unto you."
+  },
+  {
+    day: 20,
+    title: "The Point of No Return",
+    focus: "Permanent Shift",
+    morningPractice: "Declare out loud, with conviction: 'I will NEVER go back to scarcity thinking. The old version of me who feared money is gone. I am permanently, irreversibly committed to abundance.' Write this declaration and sign it.",
+    affirmation: "My transformation is complete at the deepest level. Abundance is no longer something I practice — it is who I AM. There is no going back because there is nothing to go back to.",
+    exercise: "Identify your Top 3 money triggers — the situations that most often pull you back into scarcity mode. Write a specific abundance response for each one. When the trigger hits, you'll have your new response ready.",
+    visualization: "See your old scarcity self walking away from you, getting smaller and smaller until she disappears completely. Wave goodbye with love. Then turn around and see your abundant future stretching endlessly before you — golden, infinite, and yours.",
+    eveningReflection: "Read your new money story from Day 8. Does it need updating? Is your vision BIGGER now than it was 12 days ago? If yes, your thermostat has shifted. Update the story to match your expanded belief.",
+    keyTeaching: "Day 20 is the neurological tipping point. Research shows 21 days creates a habit, but Day 20 is when the new neural pathways are strong enough to become your DEFAULT rather than your practice. You're almost there."
+  },
+  {
+    day: 21,
+    title: "The New You Is Here",
+    focus: "Integration & Celebration",
+    morningPractice: "Read your Day 1 money belief, then read your Day 8 money story, then read your Day 20 declaration. See the arc of transformation. Write a final money manifesto — your unshakeable financial truth going forward.",
+    affirmation: "I have rewired my mind for wealth. I am a magnet for money, opportunities, and abundance in all forms. This is not the end of my transformation — it is the beginning of my abundant life.",
+    exercise: "Celebrate. Buy yourself something — even small — that represents your new money identity. Not from scarcity, but from abundance. Let it be an anchor item that reminds you who you've become.",
+    visualization: "See the next 12 months unfolding with your new abundance programming running. See Sovereign Publishing thriving. See sales notifications coming in. See your bank balance growing steadily. See yourself calm, confident, and free. Feel the deep knowing: this is happening.",
+    eveningReflection: "What is the single biggest transformation from these 21 days? Write it on a card and put it where you'll see it every morning. This is your anchor truth.",
+    keyTeaching: "You've done in 21 days what most people never do in a lifetime — you've consciously reprogrammed your money mindset. But remember: the reprogramming is only as permanent as your daily practice. Keep the gratitude, keep the visualization, keep the abundant identity. This isn't a programme you completed — it's a life you've begun."
+  }
 ];
 
-const INTERP_METHODS = [
-  { key: "literal", label: "Literal/Historical", icon: "📜", desc: "What did this mean to the original audience in their time and culture?" },
-  { key: "moral", label: "Moral/Ethical", icon: "⚖️", desc: "What behaviour, attitude, or principle is this teaching?" },
-  { key: "typological", label: "Typological", icon: "🔗", desc: "How does this foreshadow or connect to Jesus and the New Testament?" },
-  { key: "personal", label: "Personal Application", icon: "💡", desc: "What is God saying to YOU today through this passage?" },
-];
+// ── Styles ──
+const fonts = `
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600;700&display=swap');
+`;
 
 const App = () => {
-  const [view, setView] = useState("home");
   const [currentDay, setCurrentDay] = useState(1);
-  const [completed, setCompleted] = useState({});
-  const [notes, setNotes] = useState({});
-  const [noteText, setNoteText] = useState("");
-  const [expandedMethod, setExpandedMethod] = useState(null);
+  const [view, setView] = useState("home"); // home, day, journal, progress
+  const [completedDays, setCompletedDays] = useState({});
+  const [journalEntries, setJournalEntries] = useState({});
+  const [journalText, setJournalText] = useState("");
+  const [expandedSection, setExpandedSection] = useState(null);
   const [loaded, setLoaded] = useState(false);
-  const [fade, setFade] = useState(false);
-  const [aiInsight, setAiInsight] = useState("");
-  const [aiLoading, setAiLoading] = useState(false);
-  const [selectedMonth, setSelectedMonth] = useState(0); // 0 = all
+  const [fadeIn, setFadeIn] = useState(false);
 
+  // Load from storage
   useEffect(() => {
     (async () => {
-      try { const r = await localGet("bible-completed"); if(r) setCompleted(JSON.parse(r.value)); } catch{}
-      try { const r = await localGet("bible-notes"); if(r) setNotes(JSON.parse(r.value)); } catch{}
-      try { const r = await localGet("bible-day"); if(r) setCurrentDay(parseInt(r.value)); } catch{}
+      try {
+        const r1 = await localGet("abundance-completed");
+        if (r1) setCompletedDays(JSON.parse(r1.value));
+      } catch {}
+      try {
+        const r2 = await localGet("abundance-journal");
+        if (r2) setJournalEntries(JSON.parse(r2.value));
+      } catch {}
+      try {
+        const r3 = await localGet("abundance-currentday");
+        if (r3) setCurrentDay(parseInt(r3.value));
+      } catch {}
       setLoaded(true);
-      setTimeout(() => setFade(true), 50);
+      setTimeout(() => setFadeIn(true), 50);
     })();
   }, []);
 
-  const save = async (key, data, setter) => { setter(data); try { await localSet(key, JSON.stringify(data)); } catch{} };
-  const saveDay = async (d) => { setCurrentDay(d); try { await localSet("bible-day", String(d)); } catch{} };
-
-  const toggleDone = (day) => save("bible-completed", { ...completed, [day]: !completed[day] }, setCompleted);
-  const saveNote = () => { save("bible-notes", { ...notes, [currentDay]: noteText }, setNotes); };
-
-  const completedCount = Object.values(completed).filter(Boolean).length;
-  const pct = Math.round((completedCount / 90) * 100);
-  const dayData = PLAN.find(d => d.day === currentDay);
-
-  const getAiInsight = async () => {
-    if (!dayData) return;
-    setAiLoading(true);
-    setAiInsight("");
-    // Use the built-in context as interpretation since we're in standalone mode
-    setTimeout(() => {
-      const insight = `📖 KEY MESSAGE\n${dayData.ctx}\n\n🔗 BIGGER PICTURE\nThis passage sits within the theme of "${dayData.theme}." As you read, ask: How does this connect to what I read yesterday? The Bible is one continuous story — every passage advances it.\n\n💡 TODAY'S TAKEAWAY\nAfter reading ${dayData.ref}, sit quietly for 2 minutes and ask: "What is the one thing from this passage I need to carry with me today?" Write it down. The practice of personal application is what transforms reading into understanding.`;
-      setAiInsight(insight);
-      setAiLoading(false);
-    }, 800);
+  const saveCompleted = async (data) => {
+    setCompletedDays(data);
+    try { await localSet("abundance-completed", JSON.stringify(data)); } catch {}
   };
 
-  const filteredPlan = selectedMonth === 0 ? PLAN : PLAN.filter(d => d.month === selectedMonth);
+  const saveJournal = async (data) => {
+    setJournalEntries(data);
+    try { await localSet("abundance-journal", JSON.stringify(data)); } catch {}
+  };
+
+  const saveCurrentDay = async (d) => {
+    setCurrentDay(d);
+    try { await localSet("abundance-currentday", String(d)); } catch {}
+  };
+
+  const toggleComplete = (day) => {
+    const next = { ...completedDays, [day]: !completedDays[day] };
+    saveCompleted(next);
+  };
+
+  const completedCount = Object.values(completedDays).filter(Boolean).length;
+  const progressPct = Math.round((completedCount / 21) * 100);
+
+  const dayData = DAYS.find(d => d.day === currentDay);
+
+  const sections = dayData ? [
+    { key: "morning", icon: "☀️", label: "Morning Practice", content: dayData.morningPractice },
+    { key: "affirmation", icon: "✨", label: "Affirmation", content: dayData.affirmation },
+    { key: "exercise", icon: "⚡", label: "Daily Exercise", content: dayData.exercise },
+    { key: "visualization", icon: "🔮", label: "Visualization", content: dayData.visualization },
+    { key: "teaching", icon: "📖", label: "Key Teaching", content: dayData.keyTeaching },
+    { key: "reflection", icon: "🌙", label: "Evening Reflection", content: dayData.eveningReflection },
+  ] : [];
+
+  const getWeek = (day) => Math.ceil(day / 7);
+  const focusColors = {
+    "Awareness": "#D4AF37", "Gratitude": "#E8B960", "Releasing Resistance": "#C9A84C",
+    "Receiving": "#F0D080", "Embodiment": "#B8942E", "Giving": "#DFC56A",
+    "Reflection & Reset": "#A68A2E", "New Narrative": "#D4AF37", "Rhonda's Countdown Method": "#E8B960",
+    "Action & Alignment": "#C9A84C", "Celebrating Others' Wealth": "#F0D080",
+    "Thought Discipline": "#B8942E", "Expanding Capacity": "#DFC56A", "Deep Reset": "#A68A2E",
+    "Identity Shift": "#D4AF37", "Somatic Rewiring": "#E8B960", "Visual Anchoring": "#C9A84C",
+    "Deep Forgiveness": "#F0D080", "Beyond Enough": "#B8942E", "Permanent Shift": "#DFC56A",
+    "Integration & Celebration": "#D4AF37"
+  };
 
   if (!loaded) return null;
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
-        * { margin:0; padding:0; box-sizing:border-box; }
-        .br { 
-          font-family:'DM Sans',sans-serif; min-height:100vh; 
-          background: #F7F3EE; color:#2C2420;
-          opacity:${fade?1:0}; transition:opacity 0.8s;
+      <style>{fonts}{`
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .ab-root {
+          font-family: 'Outfit', sans-serif;
+          min-height: 100vh;
+          background: #0A0A0A;
+          color: #E8E0D0;
+          overflow-x: hidden;
+          opacity: ${fadeIn ? 1 : 0};
+          transition: opacity 0.8s ease;
         }
-        .br::before {
-          content:''; position:fixed; top:0;left:0;right:0;bottom:0; pointer-events:none; z-index:0;
-          background: radial-gradient(ellipse at 30% 0%, rgba(139,90,43,0.04) 0%, transparent 50%),
-                      radial-gradient(ellipse at 70% 100%, rgba(139,90,43,0.03) 0%, transparent 50%);
+        .ab-root::before {
+          content: '';
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: radial-gradient(ellipse at 20% 0%, rgba(212,175,55,0.06) 0%, transparent 60%),
+                      radial-gradient(ellipse at 80% 100%, rgba(212,175,55,0.04) 0%, transparent 60%);
+          pointer-events: none;
+          z-index: 0;
         }
-        .brc { position:relative; z-index:1; max-width:480px; margin:0 auto; padding:20px 16px 100px; }
-        
-        .bnav { position:fixed; bottom:0;left:0;right:0; z-index:100; background:rgba(247,243,238,0.97); backdrop-filter:blur(20px); border-top:1px solid rgba(139,90,43,0.1); display:flex; justify-content:space-around; padding:10px 0 20px; }
-        .bnav-btn { background:none; border:none; color:#999; font-size:14px; font-family:'DM Sans'; display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; padding:4px 12px; transition:color 0.3s; }
-        .bnav-btn.act { color:#8B5A2B; }
-        .bnav-ico { font-size:28px; }
+        .ab-content { position: relative; z-index: 1; max-width: 480px; margin: 0 auto; padding: 20px 16px 100px; }
+        .ab-nav {
+          position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+          background: rgba(10,10,10,0.95); backdrop-filter: blur(20px);
+          border-top: 1px solid rgba(212,175,55,0.15);
+          display: flex; justify-content: space-around; padding: 12px 0 20px;
+        }
+        .ab-nav-btn {
+          background: none; border: none; color: #666; font-size: 13px; 
+          font-family: 'Outfit'; display: flex; flex-direction: column; 
+          align-items: center; gap: 4px; cursor: pointer; transition: color 0.3s;
+          padding: 4px 12px;
+        }
+        .ab-nav-btn.active { color: #D4AF37; }
+        .ab-nav-icon { font-size: 24px; }
+        .ab-header {
+          text-align: center; padding: 24px 0 32px;
+        }
+        .ab-logo {
+          font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300;
+          color: #D4AF37; letter-spacing: 3px; margin-bottom: 4px;
+        }
+        .ab-subtitle {
+          font-size: 13px; letter-spacing: 4px; text-transform: uppercase;
+          color: rgba(212,175,55,0.5); font-weight: 300;
+        }
+        .ab-progress-ring {
+          width: 180px; height: 180px; margin: 24px auto;
+          position: relative; display: flex; align-items: center; justify-content: center;
+        }
+        .ab-progress-ring svg { position: absolute; transform: rotate(-90deg); }
+        .ab-progress-center {
+          text-align: center;
+        }
+        .ab-progress-pct { font-family: 'Cormorant Garamond'; font-size: 52px; color: #D4AF37; font-weight: 300; line-height: 1; }
+        .ab-progress-label { font-size: 14px; color: #666; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+        .ab-week-label {
+          font-family: 'Cormorant Garamond'; font-size: 20px; color: rgba(212,175,55,0.6);
+          letter-spacing: 2px; margin: 28px 0 12px; font-weight: 300;
+        }
+        .ab-day-card {
+          background: rgba(212,175,55,0.04); border: 1px solid rgba(212,175,55,0.1);
+          border-radius: 12px; padding: 16px; margin-bottom: 8px; cursor: pointer;
+          transition: all 0.3s ease; display: flex; align-items: center; gap: 14px;
+        }
+        .ab-day-card:hover { background: rgba(212,175,55,0.08); border-color: rgba(212,175,55,0.2); }
+        .ab-day-card.completed { border-color: rgba(212,175,55,0.3); }
+        .ab-day-num {
+          width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+          font-family: 'Cormorant Garamond'; font-size: 20px; font-weight: 600; flex-shrink: 0;
+          background: rgba(212,175,55,0.1); color: #D4AF37; border: 1px solid rgba(212,175,55,0.2);
+          transition: all 0.3s;
+        }
+        .ab-day-card.completed .ab-day-num { background: #D4AF37; color: #0A0A0A; }
+        .ab-day-info { flex: 1; min-width: 0; }
+        .ab-day-title { font-size: 18px; font-weight: 500; color: #E8E0D0; margin-bottom: 2px; }
+        .ab-day-focus { font-size: 15px; color: rgba(212,175,55,0.6); font-weight: 300; }
+        .ab-day-arrow { color: rgba(212,175,55,0.3); font-size: 22px; }
 
-        .bhdr { text-align:center; padding:20px 0 28px; }
-        .blogo { font-family:'Crimson Pro',serif; font-size:36px; font-weight:300; color:#8B5A2B; letter-spacing:2px; }
-        .bsub { font-size:14px; letter-spacing:4px; text-transform:uppercase; color:rgba(139,90,43,0.45); font-weight:400; margin-top:2px; }
+        /* Day View */
+        .ab-day-header { text-align: center; padding: 20px 0 24px; }
+        .ab-day-badge {
+          display: inline-block; padding: 4px 16px; border-radius: 20px;
+          font-size: 14px; letter-spacing: 2px; text-transform: uppercase;
+          background: rgba(212,175,55,0.12); color: #D4AF37; margin-bottom: 12px;
+        }
+        .ab-day-view-title {
+          font-family: 'Cormorant Garamond'; font-size: 38px; font-weight: 300;
+          color: #D4AF37; line-height: 1.2; margin-bottom: 6px;
+        }
+        .ab-day-view-focus { font-size: 16px; color: rgba(212,175,55,0.5); letter-spacing: 2px; }
+        .ab-section {
+          background: rgba(212,175,55,0.03); border: 1px solid rgba(212,175,55,0.08);
+          border-radius: 12px; margin-bottom: 8px; overflow: hidden; transition: all 0.3s;
+        }
+        .ab-section.expanded { background: rgba(212,175,55,0.06); border-color: rgba(212,175,55,0.15); }
+        .ab-section-header {
+          display: flex; align-items: center; gap: 12px; padding: 16px;
+          cursor: pointer; transition: background 0.3s;
+        }
+        .ab-section-header:hover { background: rgba(212,175,55,0.05); }
+        .ab-section-icon { font-size: 24px; }
+        .ab-section-label { flex: 1; font-size: 18px; font-weight: 500; }
+        .ab-section-toggle { color: rgba(212,175,55,0.4); font-size: 18px; transition: transform 0.3s; }
+        .ab-section-toggle.open { transform: rotate(180deg); }
+        .ab-section-content {
+          padding: 0 16px 16px; font-size: 18px; line-height: 1.7; color: rgba(232,224,208,0.8); font-weight: 300;
+        }
+        .ab-section.affirmation-section .ab-section-content {
+          font-family: 'Cormorant Garamond'; font-size: 22px; font-style: italic;
+          color: #D4AF37; line-height: 1.6; text-align: center; padding: 8px 20px 20px;
+        }
+        .ab-complete-btn {
+          display: flex; align-items: center; justify-content: center; gap: 10px;
+          width: 100%; padding: 16px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.3);
+          background: rgba(212,175,55,0.08); color: #D4AF37; font-family: 'Outfit';
+          font-size: 18px; font-weight: 500; cursor: pointer; margin-top: 20px; transition: all 0.3s;
+          letter-spacing: 1px;
+        }
+        .ab-complete-btn:hover { background: rgba(212,175,55,0.15); }
+        .ab-complete-btn.done { background: #D4AF37; color: #0A0A0A; border-color: #D4AF37; }
+        .ab-day-nav {
+          display: flex; justify-content: space-between; margin-top: 16px; gap: 8px;
+        }
+        .ab-day-nav-btn {
+          flex: 1; padding: 12px; border-radius: 10px; border: 1px solid rgba(212,175,55,0.15);
+          background: rgba(212,175,55,0.04); color: rgba(212,175,55,0.6);
+          font-family: 'Outfit'; font-size: 16px; cursor: pointer; text-align: center;
+          transition: all 0.3s;
+        }
+        .ab-day-nav-btn:hover { background: rgba(212,175,55,0.1); color: #D4AF37; }
+        .ab-back-btn {
+          background: none; border: none; color: rgba(212,175,55,0.5); font-family: 'Outfit';
+          font-size: 17px; cursor: pointer; padding: 8px 0; display: flex; align-items: center; gap: 6px;
+          transition: color 0.3s;
+        }
+        .ab-back-btn:hover { color: #D4AF37; }
 
-        .bprog { display:flex; align-items:center; gap:14px; padding:16px; background:rgba(139,90,43,0.05); border-radius:14px; border:1px solid rgba(139,90,43,0.08); margin-bottom:24px; }
-        .bprog-bar-wrap { flex:1; height:6px; background:rgba(139,90,43,0.08); border-radius:3px; overflow:hidden; }
-        .bprog-bar { height:100%; background:linear-gradient(90deg,#8B5A2B,#C8956C); border-radius:3px; transition:width 1s ease; }
-        .bprog-txt { font-size:20px; color:#8B5A2B; font-weight:500; min-width:60px; text-align:right; }
-
-        .bmonth-tabs { display:flex; gap:6px; margin-bottom:20px; flex-wrap:wrap; }
-        .bmonth-tab { padding:6px 14px; border-radius:20px; border:1px solid rgba(139,90,43,0.12); background:transparent; color:#8B5A2B; font-family:'DM Sans'; font-size:16px; cursor:pointer; transition:all 0.3s; font-weight:400; }
-        .bmonth-tab.act { background:#8B5A2B; color:#F7F3EE; border-color:#8B5A2B; }
-
-        .bcard { background:white; border:1px solid rgba(139,90,43,0.08); border-radius:12px; padding:14px 16px; margin-bottom:6px; cursor:pointer; display:flex; align-items:center; gap:12px; transition:all 0.3s; box-shadow:0 1px 3px rgba(0,0,0,0.03); }
-        .bcard:hover { border-color:rgba(139,90,43,0.2); box-shadow:0 2px 8px rgba(139,90,43,0.08); }
-        .bcard.done { border-left:3px solid #8B5A2B; }
-        .bcard-num { width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center; font-family:'Crimson Pro';font-size:22px;font-weight:500;flex-shrink:0; background:rgba(139,90,43,0.06);color:#8B5A2B;border:1px solid rgba(139,90,43,0.12); transition:all 0.3s; }
-        .bcard.done .bcard-num { background:#8B5A2B; color:white; }
-        .bcard-info { flex:1; min-width:0; }
-        .bcard-ref { font-size:19px; color:rgba(139,90,43,0.5); font-weight:500; letter-spacing:0.5px; }
-        .bcard-title { font-size:22px; font-weight:500; color:#2C2420; margin-top:1px; }
-        .bcard-arr { color:rgba(139,90,43,0.25); font-size:24px; }
-
-        /* Day view */
-        .bback { background:none;border:none;color:rgba(139,90,43,0.5);font-family:'DM Sans';font-size:21px;cursor:pointer;padding:8px 0;display:flex;align-items:center;gap:6px; }
-        .bday-hdr { text-align:center; padding:16px 0 20px; }
-        .bday-badge { display:inline-block;padding:4px 14px;border-radius:20px;font-size:18px;letter-spacing:2px;text-transform:uppercase;background:rgba(139,90,43,0.08);color:#8B5A2B;margin-bottom:10px;font-weight:500; }
-        .bday-ref { font-family:'Crimson Pro';font-size:34px;font-weight:300;color:#8B5A2B;line-height:1.2;margin-bottom:4px; }
-        .bday-title { font-size:24px;color:#2C2420;font-weight:500;margin-bottom:4px; }
-        .bday-theme { font-size:19px;color:rgba(139,90,43,0.5);letter-spacing:2px;text-transform:uppercase; }
-
-        .bctx { background:white;border:1px solid rgba(139,90,43,0.1);border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.03); }
-        .bctx-label { font-size:18px;letter-spacing:2px;text-transform:uppercase;color:rgba(139,90,43,0.5);margin-bottom:8px;font-weight:500; }
-        .bctx-text { font-family:'Crimson Pro';font-size:24px;line-height:1.7;color:#3D2E24;font-weight:300; }
-
-        .bmethod { background:white;border:1px solid rgba(139,90,43,0.08);border-radius:12px;margin-bottom:6px;overflow:hidden;transition:all 0.3s;box-shadow:0 1px 3px rgba(0,0,0,0.02); }
-        .bmethod.exp { border-color:rgba(139,90,43,0.2); }
-        .bmethod-hdr { display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer; }
-        .bmethod-ico { font-size:26px; }
-        .bmethod-lbl { flex:1;font-size:21px;font-weight:500;color:#2C2420; }
-        .bmethod-tog { color:rgba(139,90,43,0.3);font-size:20px;transition:transform 0.3s; }
-        .bmethod-tog.open { transform:rotate(180deg); }
-        .bmethod-desc { padding:0 16px 14px;font-size:21px;line-height:1.7;color:#6B5744;font-weight:300; }
-
-        .bai-btn { width:100%;padding:14px;border-radius:12px;border:1px solid rgba(139,90,43,0.15);background:linear-gradient(135deg,rgba(139,90,43,0.06),rgba(200,149,108,0.06));color:#8B5A2B;font-family:'DM Sans';font-size:21px;font-weight:500;cursor:pointer;margin:16px 0;transition:all 0.3s;letter-spacing:0.5px; }
-        .bai-btn:hover { background:linear-gradient(135deg,rgba(139,90,43,0.1),rgba(200,149,108,0.1));border-color:rgba(139,90,43,0.25); }
-        .bai-result { background:rgba(139,90,43,0.04);border:1px solid rgba(139,90,43,0.1);border-radius:12px;padding:16px;margin:12px 0;font-size:22px;line-height:1.7;color:#3D2E24;white-space:pre-wrap;font-weight:300; }
-        .bai-loading { text-align:center;padding:20px;color:#8B5A2B;font-size:21px; }
-        @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
-        .bai-loading span { animation:pulse 1.5s infinite; }
-
-        .bcomplete { display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:12px;border:1px solid rgba(139,90,43,0.2);background:rgba(139,90,43,0.05);color:#8B5A2B;font-family:'DM Sans';font-size:22px;font-weight:500;cursor:pointer;margin-top:16px;transition:all 0.3s; }
-        .bcomplete:hover { background:rgba(139,90,43,0.1); }
-        .bcomplete.dn { background:#8B5A2B;color:#F7F3EE;border-color:#8B5A2B; }
-
-        .bnote-area { width:100%;min-height:100px;background:white;border:1px solid rgba(139,90,43,0.12);border-radius:12px;padding:14px;color:#2C2420;font-family:'DM Sans';font-size:22px;resize:vertical;outline:none;line-height:1.6; }
-        .bnote-area:focus { border-color:rgba(139,90,43,0.3); }
-        .bnote-area::placeholder { color:rgba(139,90,43,0.25); }
-        .bnote-save { padding:10px 20px;border-radius:10px;background:rgba(139,90,43,0.08);border:1px solid rgba(139,90,43,0.15);color:#8B5A2B;font-family:'DM Sans';font-size:20px;cursor:pointer;margin-top:8px; }
-
-        .bdnav { display:flex;justify-content:space-between;margin-top:14px;gap:8px; }
-        .bdnav-btn { flex:1;padding:10px;border-radius:10px;border:1px solid rgba(139,90,43,0.1);background:white;color:rgba(139,90,43,0.6);font-family:'DM Sans';font-size:20px;cursor:pointer;text-align:center;transition:all 0.3s; }
-        .bdnav-btn:hover { color:#8B5A2B;border-color:rgba(139,90,43,0.2); }
-
-        .bdiv { height:1px;background:linear-gradient(90deg,transparent,rgba(139,90,43,0.12),transparent);margin:20px 0; }
-        .bsec-title { font-family:'Crimson Pro';font-size:21px;color:rgba(139,90,43,0.6);font-weight:300;margin-bottom:12px; }
-
-        /* Notes view */
-        .bnote-entry { background:white;border:1px solid rgba(139,90,43,0.08);border-radius:10px;padding:14px;margin-bottom:6px;box-shadow:0 1px 2px rgba(0,0,0,0.02); }
-        .bnote-entry-day { font-size:19px;color:#8B5A2B;font-weight:500;margin-bottom:4px; }
-        .bnote-entry-text { font-size:21px;line-height:1.6;color:#6B5744;font-weight:300; }
+        /* Journal */
+        .ab-journal-area {
+          width: 100%; min-height: 120px; background: rgba(212,175,55,0.04);
+          border: 1px solid rgba(212,175,55,0.12); border-radius: 12px; padding: 14px;
+          color: #E8E0D0; font-family: 'Outfit'; font-size: 18px; resize: vertical;
+          outline: none; transition: border-color 0.3s; line-height: 1.6;
+        }
+        .ab-journal-area:focus { border-color: rgba(212,175,55,0.4); }
+        .ab-journal-area::placeholder { color: rgba(212,175,55,0.25); }
+        .ab-journal-save {
+          padding: 12px 24px; border-radius: 10px; background: rgba(212,175,55,0.12);
+          border: 1px solid rgba(212,175,55,0.25); color: #D4AF37; font-family: 'Outfit';
+          font-size: 17px; cursor: pointer; margin-top: 10px; transition: all 0.3s;
+        }
+        .ab-journal-save:hover { background: rgba(212,175,55,0.2); }
+        .ab-journal-entry {
+          background: rgba(212,175,55,0.04); border: 1px solid rgba(212,175,55,0.08);
+          border-radius: 10px; padding: 14px; margin-bottom: 8px;
+        }
+        .ab-journal-entry-day { font-size: 15px; color: #D4AF37; letter-spacing: 1px; margin-bottom: 6px; font-weight: 500; }
+        .ab-journal-entry-text { font-size: 17px; line-height: 1.6; color: rgba(232,224,208,0.7); font-weight: 300; }
 
         /* Progress */
-        .bstat-row { display:flex; gap:8px; margin-bottom:16px; }
-        .bstat { flex:1; text-align:center; background:white; border:1px solid rgba(139,90,43,0.08); border-radius:12px; padding:16px 8px; }
-        .bstat-num { font-family:'Crimson Pro';font-size:44px;color:#8B5A2B;font-weight:300;line-height:1; }
-        .bstat-lbl { font-size:17px;color:#999;letter-spacing:2px;text-transform:uppercase;margin-top:4px; }
-        .bcal { display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-top:16px; }
-        .bcal-d { aspect-ratio:1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid rgba(139,90,43,0.06);background:white;color:#999;cursor:pointer;transition:all 0.3s; }
-        .bcal-d.dn { background:rgba(139,90,43,0.15);color:#8B5A2B;border-color:rgba(139,90,43,0.2);font-weight:600; }
-        .bcal-d.cur { border-color:#8B5A2B;color:#8B5A2B; }
+        .ab-streak { text-align: center; padding: 20px 0; }
+        .ab-streak-num { font-family: 'Cormorant Garamond'; font-size: 72px; color: #D4AF37; font-weight: 300; line-height: 1; }
+        .ab-streak-label { font-size: 15px; color: #666; letter-spacing: 3px; text-transform: uppercase; margin-top: 8px; }
+        .ab-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 20px; }
+        .ab-cal-day {
+          aspect-ratio: 1; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+          font-size: 17px; font-weight: 500; border: 1px solid rgba(212,175,55,0.08);
+          background: rgba(212,175,55,0.03); color: #666; transition: all 0.3s;
+        }
+        .ab-cal-day.done { background: rgba(212,175,55,0.2); color: #D4AF37; border-color: rgba(212,175,55,0.3); }
+        .ab-cal-day.today { border-color: #D4AF37; color: #D4AF37; }
 
-        .breset { background:none;border:1px solid rgba(200,80,80,0.15);color:rgba(200,80,80,0.4);font-family:'DM Sans';font-size:19px;padding:8px 16px;border-radius:8px;cursor:pointer;margin-top:24px; }
+        .ab-divider {
+          height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.15), transparent);
+          margin: 24px 0;
+        }
+        .ab-section-title {
+          font-family: 'Cormorant Garamond'; font-size: 22px; color: rgba(212,175,55,0.7);
+          font-weight: 300; margin-bottom: 16px; letter-spacing: 1px;
+        }
+        .ab-reset-btn {
+          background: none; border: 1px solid rgba(255,80,80,0.2); color: rgba(255,80,80,0.5);
+          font-family: 'Outfit'; font-size: 15px; padding: 8px 16px; border-radius: 8px;
+          cursor: pointer; margin-top: 24px; transition: all 0.3s;
+        }
+        .ab-reset-btn:hover { border-color: rgba(255,80,80,0.5); color: rgba(255,80,80,0.8); }
+
+        @keyframes shimmer {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+        .ab-shimmer {
+          background: linear-gradient(90deg, #D4AF37 0%, #F0D080 25%, #D4AF37 50%, #F0D080 75%, #D4AF37 100%);
+          background-size: 200% auto;
+          -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation: shimmer 4s linear infinite;
+        }
       `}</style>
 
-      <div className="br">
-        <div className="brc">
-          {/* HOME */}
+      <div className="ab-root">
+        <div className="ab-content">
+          {/* ── HOME VIEW ── */}
           {view === "home" && (
             <>
-              <div className="bhdr">
-                <div className="blogo">The Word</div>
-                <div className="bsub">Read the Bible in 90 Days</div>
+              <div className="ab-header">
+                <div className="ab-logo">ABUNDANCE</div>
+                <div className="ab-subtitle">21 Days to Rewire Your Wealth Mind</div>
               </div>
 
-              <div className="bprog">
-                <div className="bprog-bar-wrap">
-                  <div className="bprog-bar" style={{ width: `${pct}%` }} />
+              <div className="ab-progress-ring">
+                <svg width="180" height="180" viewBox="0 0 180 180">
+                  <circle cx="90" cy="90" r="78" fill="none" stroke="rgba(212,175,55,0.1)" strokeWidth="2" />
+                  <circle cx="90" cy="90" r="78" fill="none" stroke="#D4AF37" strokeWidth="2"
+                    strokeDasharray={`${2 * Math.PI * 78}`}
+                    strokeDashoffset={`${2 * Math.PI * 78 * (1 - progressPct / 100)}`}
+                    strokeLinecap="round"
+                    style={{ transition: "stroke-dashoffset 1s ease" }}
+                  />
+                </svg>
+                <div className="ab-progress-center">
+                  <div className="ab-progress-pct">{progressPct}%</div>
+                  <div className="ab-progress-label">{completedCount} of 21 days</div>
                 </div>
-                <div className="bprog-txt">{completedCount}/90</div>
               </div>
 
-              <div className="bmonth-tabs">
-                {[{v:0,l:"All"},{v:1,l:"Month 1 · Foundations"},{v:2,l:"Month 2 · Deepening"},{v:3,l:"Month 3 · Completion"}].map(t => (
-                  <button key={t.v} className={`bmonth-tab ${selectedMonth===t.v?"act":""}`} onClick={() => setSelectedMonth(t.v)}>{t.l}</button>
-                ))}
-              </div>
-
-              {filteredPlan.map(d => (
-                <div key={d.day} className={`bcard ${completed[d.day]?"done":""}`}
-                  onClick={() => { saveDay(d.day); setView("day"); setExpandedMethod(null); setAiInsight(""); setNoteText(notes[d.day]||""); }}>
-                  <div className="bcard-num">{completed[d.day]?"✓":d.day}</div>
-                  <div className="bcard-info">
-                    <div className="bcard-ref">{d.ref}</div>
-                    <div className="bcard-title">{d.title}</div>
+              {[1, 2, 3].map(week => (
+                <div key={week}>
+                  <div className="ab-week-label">
+                    Week {week} {week === 1 ? "— Awakening" : week === 2 ? "— Deepening" : "— Embodying"}
                   </div>
-                  <div className="bcard-arr">›</div>
+                  {DAYS.filter(d => getWeek(d.day) === week).map(d => (
+                    <div key={d.day} className={`ab-day-card ${completedDays[d.day] ? "completed" : ""}`}
+                      onClick={() => { saveCurrentDay(d.day); setView("day"); setExpandedSection(null); }}>
+                      <div className="ab-day-num">{completedDays[d.day] ? "✓" : d.day}</div>
+                      <div className="ab-day-info">
+                        <div className="ab-day-title">{d.title}</div>
+                        <div className="ab-day-focus">{d.focus}</div>
+                      </div>
+                      <div className="ab-day-arrow">›</div>
+                    </div>
+                  ))}
                 </div>
               ))}
             </>
           )}
 
-          {/* DAY VIEW */}
+          {/* ── DAY VIEW ── */}
           {view === "day" && dayData && (
             <>
-              <button className="bback" onClick={() => setView("home")}>← All Readings</button>
+              <button className="ab-back-btn" onClick={() => setView("home")}>← All Days</button>
 
-              <div className="bday-hdr">
-                <div className="bday-badge">Day {dayData.day} of 90 · Month {dayData.month}</div>
-                <div className="bday-ref">{dayData.ref}</div>
-                <div className="bday-title">{dayData.title}</div>
-                <div className="bday-theme">{dayData.theme}</div>
+              <div className="ab-day-header">
+                <div className="ab-day-badge">Day {dayData.day} of 21</div>
+                <div className="ab-day-view-title">{dayData.title}</div>
+                <div className="ab-day-view-focus">Focus: {dayData.focus}</div>
               </div>
 
-              <div className="bctx">
-                <div className="bctx-label">Context & Interpretation Guide</div>
-                <div className="bctx-text">{dayData.ctx}</div>
-              </div>
-
-              <div className="bsec-title">How to Read This Passage</div>
-              {INTERP_METHODS.map(m => (
-                <div key={m.key} className={`bmethod ${expandedMethod===m.key?"exp":""}`}>
-                  <div className="bmethod-hdr" onClick={() => setExpandedMethod(expandedMethod===m.key?null:m.key)}>
-                    <span className="bmethod-ico">{m.icon}</span>
-                    <span className="bmethod-lbl">{m.label}</span>
-                    <span className={`bmethod-tog ${expandedMethod===m.key?"open":""}`}>▼</span>
+              {sections.map(s => (
+                <div key={s.key} className={`ab-section ${expandedSection === s.key ? "expanded" : ""} ${s.key === "affirmation" ? "affirmation-section" : ""}`}>
+                  <div className="ab-section-header" onClick={() => setExpandedSection(expandedSection === s.key ? null : s.key)}>
+                    <span className="ab-section-icon">{s.icon}</span>
+                    <span className="ab-section-label">{s.label}</span>
+                    <span className={`ab-section-toggle ${expandedSection === s.key ? "open" : ""}`}>▼</span>
                   </div>
-                  {expandedMethod===m.key && <div className="bmethod-desc">{m.desc}</div>}
+                  {expandedSection === s.key && (
+                    <div className="ab-section-content">{s.content}</div>
+                  )}
                 </div>
               ))}
 
-              <button className="bai-btn" onClick={getAiInsight} disabled={aiLoading}>
-                {aiLoading ? "Generating insight..." : "✦ Get Interpretation & Insight"}
-              </button>
-              {aiLoading && <div className="bai-loading"><span>Thinking deeply about this passage...</span></div>}
-              {aiInsight && <div className="bai-result">{aiInsight}</div>}
-
-              <button className={`bcomplete ${completed[dayData.day]?"dn":""}`} onClick={() => toggleDone(dayData.day)}>
-                {completed[dayData.day] ? "✓ Reading Complete" : "Mark as Read"}
+              <button
+                className={`ab-complete-btn ${completedDays[dayData.day] ? "done" : ""}`}
+                onClick={() => toggleComplete(dayData.day)}
+              >
+                {completedDays[dayData.day] ? "✓ Day Complete" : "Mark Day Complete"}
               </button>
 
-              <div className="bdiv" />
-              <div className="bsec-title">Your Notes</div>
-              <textarea className="bnote-area" placeholder="What stood out? What questions do you have? What's God saying to you?" value={noteText} onChange={e => setNoteText(e.target.value)} />
-              <button className="bnote-save" onClick={saveNote}>Save Notes</button>
+              <div className="ab-divider" />
+              <div className="ab-section-title">Journal Entry</div>
+              <textarea
+                className="ab-journal-area"
+                placeholder="Write your reflections, breakthroughs, and insights for today..."
+                value={journalText || journalEntries[dayData.day] || ""}
+                onChange={e => setJournalText(e.target.value)}
+              />
+              <button className="ab-journal-save" onClick={() => {
+                const next = { ...journalEntries, [dayData.day]: journalText };
+                saveJournal(next);
+                setJournalText("");
+              }}>Save Entry</button>
 
-              <div className="bdnav">
-                {dayData.day > 1 && <button className="bdnav-btn" onClick={() => { saveDay(dayData.day-1); setExpandedMethod(null); setAiInsight(""); setNoteText(notes[dayData.day-1]||""); }}>← Day {dayData.day-1}</button>}
-                {dayData.day < 90 && <button className="bdnav-btn" onClick={() => { saveDay(dayData.day+1); setExpandedMethod(null); setAiInsight(""); setNoteText(notes[dayData.day+1]||""); }}>Day {dayData.day+1} →</button>}
+              <div className="ab-day-nav">
+                {dayData.day > 1 && (
+                  <button className="ab-day-nav-btn" onClick={() => { saveCurrentDay(dayData.day - 1); setExpandedSection(null); setJournalText(""); }}>
+                    ← Day {dayData.day - 1}
+                  </button>
+                )}
+                {dayData.day < 21 && (
+                  <button className="ab-day-nav-btn" onClick={() => { saveCurrentDay(dayData.day + 1); setExpandedSection(null); setJournalText(""); }}>
+                    Day {dayData.day + 1} →
+                  </button>
+                )}
               </div>
             </>
           )}
 
-          {/* NOTES VIEW */}
-          {view === "notes" && (
+          {/* ── JOURNAL VIEW ── */}
+          {view === "journal" && (
             <>
-              <div className="bhdr">
-                <div className="blogo" style={{fontSize:24}}>Notes</div>
-                <div className="bsub">Your Study Journal</div>
+              <div className="ab-header">
+                <div className="ab-logo" style={{ fontSize: 22 }}>Journal</div>
+                <div className="ab-subtitle">Your Abundance Reflections</div>
               </div>
-              {Object.keys(notes).length === 0 ? (
-                <div style={{textAlign:"center",color:"#999",padding:"40px 0",fontSize:14}}>No notes yet. Start reading and write your reflections.</div>
+              {Object.keys(journalEntries).length === 0 ? (
+                <div style={{ textAlign: "center", color: "#666", padding: "40px 0", fontSize: 14 }}>
+                  No entries yet. Start a day and write your reflections.
+                </div>
               ) : (
-                Object.entries(notes).sort(([a],[b])=>Number(a)-Number(b)).map(([day,text]) => (
-                  <div key={day} className="bnote-entry">
-                    <div className="bnote-entry-day">Day {day} — {PLAN[day-1]?.ref} · {PLAN[day-1]?.title}</div>
-                    <div className="bnote-entry-text">{text}</div>
+                Object.entries(journalEntries).sort(([a],[b]) => Number(a) - Number(b)).map(([day, text]) => (
+                  <div key={day} className="ab-journal-entry">
+                    <div className="ab-journal-entry-day">Day {day} — {DAYS[day-1]?.title}</div>
+                    <div className="ab-journal-entry-text">{text}</div>
                   </div>
                 ))
               )}
             </>
           )}
 
-          {/* PROGRESS */}
+          {/* ── PROGRESS VIEW ── */}
           {view === "progress" && (
             <>
-              <div className="bhdr">
-                <div className="blogo" style={{fontSize:24}}>Progress</div>
-                <div className="bsub">Your 90-Day Journey</div>
+              <div className="ab-header">
+                <div className="ab-logo" style={{ fontSize: 22 }}>Progress</div>
+                <div className="ab-subtitle">Your Transformation Journey</div>
               </div>
 
-              <div className="bstat-row">
-                <div className="bstat"><div className="bstat-num">{completedCount}</div><div className="bstat-lbl">Days Read</div></div>
-                <div className="bstat"><div className="bstat-num">{90-completedCount}</div><div className="bstat-lbl">Remaining</div></div>
-                <div className="bstat"><div className="bstat-num">{pct}%</div><div className="bstat-lbl">Complete</div></div>
+              <div className="ab-streak">
+                <div className="ab-streak-num ab-shimmer">{completedCount}</div>
+                <div className="ab-streak-label">Days Completed</div>
               </div>
 
-              {[1,2,3].map(m => {
-                const mDays = PLAN.filter(d=>d.month===m);
-                const mDone = mDays.filter(d=>completed[d.day]).length;
+              <div className="ab-divider" />
+              <div className="ab-section-title">21-Day Map</div>
+              <div className="ab-calendar-grid">
+                {DAYS.map(d => (
+                  <div key={d.day}
+                    className={`ab-cal-day ${completedDays[d.day] ? "done" : ""} ${d.day === currentDay ? "today" : ""}`}
+                    onClick={() => { saveCurrentDay(d.day); setView("day"); }}
+                    title={d.title}
+                  >
+                    {completedDays[d.day] ? "✓" : d.day}
+                  </div>
+                ))}
+              </div>
+
+              <div className="ab-divider" />
+              <div className="ab-section-title">Milestones</div>
+              {[
+                { at: 7, label: "Week 1 — Awakening Complete", desc: "You've identified and begun dissolving your scarcity programming" },
+                { at: 14, label: "Week 2 — Deepening Complete", desc: "Your abundance thermostat has been recalibrated to a higher setting" },
+                { at: 21, label: "Week 3 — Fully Rewired", desc: "Your new money identity is installed and running" },
+              ].map(m => {
+                const done = completedCount >= m.at;
                 return (
-                  <div key={m} style={{marginBottom:20}}>
-                    <div className="bsec-title">Month {m} — {m===1?"Foundations":m===2?"Deepening":"Completion"} ({mDone}/{mDays.length})</div>
-                    <div className="bcal">
-                      {mDays.map(d => (
-                        <div key={d.day} className={`bcal-d ${completed[d.day]?"dn":""} ${d.day===currentDay?"cur":""}`}
-                          onClick={() => { saveDay(d.day); setView("day"); }} title={d.ref}>
-                          {completed[d.day]?"✓":d.day}
-                        </div>
-                      ))}
+                  <div key={m.at} className="ab-day-card" style={{ opacity: done ? 1 : 0.4, cursor: "default" }}>
+                    <div className="ab-day-num" style={done ? { background: "#D4AF37", color: "#0A0A0A" } : {}}>
+                      {done ? "✓" : m.at}
+                    </div>
+                    <div className="ab-day-info">
+                      <div className="ab-day-title">{m.label}</div>
+                      <div className="ab-day-focus">{m.desc}</div>
                     </div>
                   </div>
                 );
               })}
 
-              <div style={{textAlign:"center",marginTop:24}}>
-                <button className="breset" onClick={async () => {
-                  if(confirm("Reset all progress?")) {
-                    await save("bible-completed",{},setCompleted);
-                    await save("bible-notes",{},setNotes);
-                    saveDay(1);
+              <div style={{ textAlign: "center", marginTop: 32 }}>
+                <button className="ab-reset-btn" onClick={async () => {
+                  if (confirm("Reset all progress? This cannot be undone.")) {
+                    await saveCompleted({});
+                    await saveJournal({});
+                    saveCurrentDay(1);
                   }
-                }}>Reset Progress</button>
+                }}>Reset All Progress</button>
               </div>
             </>
           )}
         </div>
 
-        <div className="bnav">
-          {[{k:"home",i:"☩",l:"Read"},{k:"notes",i:"✎",l:"Notes"},{k:"progress",i:"◉",l:"Progress"}].map(n => (
-            <button key={n.k} className={`bnav-btn ${view===n.k?"act":""}`} onClick={() => setView(n.k)}>
-              <span className="bnav-ico">{n.i}</span>{n.l}
+        {/* ── NAV ── */}
+        <div className="ab-nav">
+          {[
+            { key: "home", icon: "◈", label: "Days" },
+            { key: "journal", icon: "✎", label: "Journal" },
+            { key: "progress", icon: "◉", label: "Progress" },
+          ].map(n => (
+            <button key={n.key} className={`ab-nav-btn ${view === n.key ? "active" : ""}`}
+              onClick={() => setView(n.key)}>
+              <span className="ab-nav-icon">{n.icon}</span>
+              {n.label}
             </button>
           ))}
         </div>
